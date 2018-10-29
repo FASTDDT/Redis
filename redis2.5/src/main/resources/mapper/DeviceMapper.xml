@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.redis.mapper.DeviceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="spring.redis.model.Device">
+        <id column="ID" property="id" />
+        <result column="device_name" property="deviceName" />
+        <result column="palace_Id" property="palaceId" />
+        <result column="device_img" property="deviceImg" />
+        <result column="device_price" property="devicePrice" />
+        <result column="device_info" property="deviceInfo" />
+        <result column="device_status" property="deviceStatus" />
+        <result column="remark" property="remark" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modify" property="gmtModify" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, device_name, palace_Id, device_img, device_price, device_info, device_status, remark, is_deleted, gmt_create, gmt_modify
+    </sql>
+
+</mapper>

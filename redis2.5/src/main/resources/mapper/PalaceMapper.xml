@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.redis.mapper.PalaceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="spring.redis.model.Palace">
+        <id column="ID" property="id" />
+        <result column="palace_id" property="palaceId" />
+        <result column="place_name" property="placeName" />
+        <result column="picture" property="picture" />
+        <result column="info" property="info" />
+        <result column="adress" property="adress" />
+        <result column="remark" property="remark" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modify" property="gmtModify" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, palace_id, place_name, picture, info, adress, remark, is_deleted, gmt_create, gmt_modify
+    </sql>
+
+</mapper>

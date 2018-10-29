@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.redis.mapper.OrderxMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="spring.redis.model.Orderx">
+        <id column="ID" property="id" />
+        <result column="order_id" property="orderId" />
+        <result column="ticket_id" property="ticketId" />
+        <result column="order_num" property="orderNum" />
+        <result column="order_price" property="orderPrice" />
+        <result column="user_id" property="userId" />
+        <result column="Bill_number" property="billNumber" />
+        <result column="state" property="state" />
+        <result column="remark" property="remark" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modify" property="gmtModify" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, order_id, ticket_id, order_num, order_price, user_id, Bill_number, state, remark, is_deleted, gmt_create, gmt_modify
+    </sql>
+
+</mapper>
