@@ -1,4 +1,6 @@
-package PACKAGE_NAME;
+package Enum;
 
-public class Enum {
+public interface BaseEnum {
+    Integer getCode();
+    String getDisc();
 }

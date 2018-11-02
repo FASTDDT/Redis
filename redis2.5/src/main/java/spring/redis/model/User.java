@@ -29,7 +29,7 @@ import lombok.experimental.Accessors;
 public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
-
+    @Version
     private Integer version;
     /**
      * 用户编号

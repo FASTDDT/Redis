@@ -1,8 +1,10 @@
-package spring.redis.service;
+package spring.redis.manager;
 
 import redis.clients.jedis.Jedis;
 
-public interface RedisService {
+import java.util.Set;
+
+public interface RedisManager {
 
     Jedis getResource();
 
@@ -10,5 +12,15 @@ public interface RedisService {
 
     void set(String key, String value);
 
+    void set(String table,String key,String value);
+
+    String get(String table,String key);
+
     String get(String key);
+
+    Set<String> getKeys(String word);
+
+    void flushCache();
+
+
 }

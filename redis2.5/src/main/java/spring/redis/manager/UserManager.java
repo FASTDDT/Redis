@@ -3,6 +3,7 @@ package spring.redis.manager;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import spring.redis.mapper.UserMapper;
 import spring.redis.model.User;
 import com.baomidou.mybatisplus.service.IService;
 
@@ -21,5 +22,14 @@ public interface UserManager extends IService<User> {
     Wrapper<User> selectUsers();
 //    Page<User> selectUserPage(Page<User> page, Integer version);
 
+    int count();
     List<User> helpPage();
+
+    Boolean OptimisticLocker();
+
+    List<User> selectPage();
+
+    Integer updateMoney() throws InterruptedException;
+
+    List<User> selectUserList(Integer current, Integer size);
 }

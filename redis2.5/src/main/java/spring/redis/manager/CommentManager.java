@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-10-29
  */
 public interface CommentManager extends IService<Comment> {
-
+    void deleteAll();
 }
