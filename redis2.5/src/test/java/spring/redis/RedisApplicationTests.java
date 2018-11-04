@@ -36,12 +36,13 @@ public class RedisApplicationTests {
     }
 
     @Test
-    public void page() {
-        //      List<User> list=userService.selectTen2();
-//        for (User user:list) {
-//            System.out.println(user.getUserId());
-
-//        }
+    public void Ip() {
+        try {
+            String string=Internet.getLocalHostLANAddress().getHostAddress();
+            System.out.println(string);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
