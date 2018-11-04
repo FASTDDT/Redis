@@ -1,4 +1,4 @@
-package Enum;
+package help.Enum;
 
 public interface BaseEnum {
     Integer getCode();

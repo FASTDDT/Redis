@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
+import help.Enum.DeleteEnum;
+import help.Form.LoginForm;
 import spring.redis.model.User;
 import spring.redis.mapper.UserMapper;
 import spring.redis.manager.UserManager;
@@ -127,6 +129,22 @@ public class UserManagerImpl extends ServiceImpl<UserMapper, User> implements Us
                 new EntityWrapper <User>()
                 .eq("version",0));
         return userPage.getRecords();
+    }
+
+    @Override
+    public User LoginCheck(LoginForm form) {
+        String nickname=form.getNickName();
+        String pwd=form.getPassword();
+        Wrapper<User> wrapper=new EntityWrapper <>();
+        wrapper.where("1={0}",1)
+                .eq("user_nickname",nickname)
+                .eq("user_password",pwd)
+                .eq("is_deleted", DeleteEnum.NOT_DELETE.getCode());
+        if (wrapper!=null){
+            return selectOne(wrapper);
+        }
+
+        return null;
     }
 
 

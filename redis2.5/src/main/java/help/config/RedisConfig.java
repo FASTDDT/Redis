@@ -1,4 +1,4 @@
-package config;
+package help.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +21,11 @@ import redis.clients.jedis.JedisPoolConfig;
 public class RedisConfig {
 
     private static Logger logger = LoggerFactory.getLogger(RedisConfig.class);
-    @Value("${redis.hostip}")
+    @Value("${spring.redis.host}")
     private String hostName;
-    @Value("${redis.port}")
+    @Value("${spring.redis.port}")
     private int port;
-    @Value("${redis.password}")
+    @Value("${spring.redis.password}")
     private String password;
     @Value("${redis.timeout}")
     private int timeout;

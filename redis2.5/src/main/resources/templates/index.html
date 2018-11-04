@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="js/my.js"></script>
+    <script>
+        $(document).ready(function () {
+         src=get_2v_src(getIp());
+         var s='<img src='+src+'/>';
+         $("#img").append(s);
+         //    f();
+        })
+
+    </script>
 </head>
 <body>
     这是首页.....
+`   <div id="img">
+
+    </div>
+<button id="getkeys" type="button" onclick="getkeys()">getkeys</button>
+<button id="flush" type="button" onclick="flush()">flush</button>
+<button id="session" type="button" onclick="setSessions()">setsessions</button>
+<hr/>
+<form method="post" action="/login">
+    <input type="text" name="nickName">
+    <input type="text" name="password">
+<input type="submit" value="submit">
+</form>
 </body>
 </html>

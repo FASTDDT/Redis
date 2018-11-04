@@ -1,4 +1,4 @@
-package config;
+package help.config;
 
 import com.baomidou.mybatisplus.entity.GlobalConfiguration;
 import com.baomidou.mybatisplus.mapper.LogicSqlInjector;

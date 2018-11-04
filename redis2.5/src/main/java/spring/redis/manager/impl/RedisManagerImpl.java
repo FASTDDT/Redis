@@ -54,6 +54,11 @@ class RedisManagerImpl implements RedisManager {
     }
 
     @Override
+    public void set(String dbname, String table, String key, String value) {
+        set(dbname+":"+table,key,value);
+    }
+
+    @Override
     public String get(String table, String key) {
         return get(table+":"+key);
     }

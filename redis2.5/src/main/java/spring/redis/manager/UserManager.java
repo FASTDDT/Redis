@@ -3,6 +3,7 @@ package spring.redis.manager;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import help.Form.LoginForm;
 import spring.redis.mapper.UserMapper;
 import spring.redis.model.User;
 import com.baomidou.mybatisplus.service.IService;
@@ -32,4 +33,6 @@ public interface UserManager extends IService<User> {
     Integer updateMoney() throws InterruptedException;
 
     List<User> selectUserList(Integer current, Integer size);
+
+    User LoginCheck(LoginForm form);
 }

@@ -1,4 +1,4 @@
-package Enum;
+package help.Enum;
 
 public enum  Time implements BaseEnum {
     MIN("分钟",60),

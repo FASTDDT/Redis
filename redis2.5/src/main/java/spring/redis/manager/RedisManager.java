@@ -12,13 +12,15 @@ public interface RedisManager {
 
     void set(String key, String value);
 
-    void set(String table,String key,String value);
+    void set(String table, String key, String value);
 
-    String get(String table,String key);
+    void set(String dbname, String table, String key, String value);
+
+    String get(String table, String key);
 
     String get(String key);
 
-    Set<String> getKeys(String word);
+    Set <String> getKeys(String word);
 
     void flushCache();
 
