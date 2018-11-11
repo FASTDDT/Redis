@@ -40,13 +40,15 @@ function flush() {
 }
 function show2v(){
     $.get("/getIp",function(data){
-
         var ip=data.data;
         var src=get_2v_src(ip,8888);
         var img='<img src="'+src+'">';
         $("#img").append(img);
-
-
     });
 }
+function setSessionId() {
+    var s=$("#sessionId").html();
+    localStorage.setItem("sessionId",s);
+}
+
 

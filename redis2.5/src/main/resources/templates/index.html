@@ -1,13 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="js/my.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Bootstrap 实例 - 标签页（Tab）插件</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/js/my.js"></script>
+    <script>
+
+            $(document).ready(
+                function () {
+                    var sesionId=localStorage.getItem("sesionId");
+                    if (sesionId!=null){
+                        $.post("/login_auto",{"sessionId":sesionId},
+                        function (data) {
+                            JSON.stringify(data);
+                            alert(data);
+                        })
+                    }
+                }
+            )
+
+
+    // $(document).ready(
+    //     function (){
+    //         setSessionId();
+    //     }
+    // )
+</script>
 </head>
 <body>
+<div>
+    <p th:text="${sessionId}" id="sessionId">Welcome to our grocery store!</p>
+</div>
 
 </body>
 </html>

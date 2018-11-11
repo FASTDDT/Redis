@@ -20,6 +20,8 @@ public interface RedisManager {
 
     String get(String key);
 
+    Boolean exists(String key);
+
     Set <String> getKeys(String word);
 
     void flushCache();

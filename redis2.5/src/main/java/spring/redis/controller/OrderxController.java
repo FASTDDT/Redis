@@ -19,7 +19,5 @@ import spring.redis.manager.OrderxManager;
 @Controller
 @RequestMapping("/orderx")
 public class OrderxController {
-    @Autowired
-    OrderxManager orderxManager;
 }
 

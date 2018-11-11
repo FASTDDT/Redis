@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
 import help.Enum.DeleteEnum;
 import help.Form.LoginForm;
+import help.Vo.UserVo;
 import spring.redis.model.User;
 import spring.redis.mapper.UserMapper;
 import spring.redis.manager.UserManager;
@@ -145,6 +146,19 @@ public class UserManagerImpl extends ServiceImpl<UserMapper, User> implements Us
         }
 
         return null;
+    }
+
+    @Override
+    public User getUser(Long userId) {
+
+        return selectById(userId);
+    }
+
+    @Override
+    public UserVo creatUserVo(User user) {
+        UserVo userVo=new UserVo();
+        userVo.setNickname(user.getUserNickname());
+        return userVo;
     }
 
 

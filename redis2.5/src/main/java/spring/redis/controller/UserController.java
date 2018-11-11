@@ -22,24 +22,4 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    UserService userService;
-    @RequestMapping("/test")
-    public String start(){
-        userService.selectTen();
-//        userService.selectTen2();
-        return "hello";
-    }
-
-    @RequestMapping("/start")
-    public String atR(){
-//        userService.selectTen();
-  //      userService.selectTen2();
-        return "hello";
-    }
 }
-
-/**
- * Error:Maven Resources Compiler: Failed to copy 'E:\springbootTest\springboot2018.2.5\redis2.5\src\main\resources\mapper\UserMapper.xml' to 'E:\springbootTest\springboot2018.2.5\redis2.5\target\classes\mapper\UserMapper.xml': E:\springbootTest\springboot2018.2.5\redis2.5\target\classes\mapper\UserMapper.xml (拒绝访问。)
- */
-

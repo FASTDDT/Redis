@@ -2,6 +2,7 @@ package spring.redis.service.impl;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import help.Form.LoginForm;
+import help.Vo.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,13 @@ public class UserServiceImpl implements UserService {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
+    }
+
+    @Override
+    public UserVo getUserVo(Long userId) {
+        User user=userManager.getUser(userId);
+
+        return userManager.creatUserVo(user);
     }
 //
 //    @Override

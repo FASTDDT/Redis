@@ -2,13 +2,17 @@ package spring.redis.controller;
 
 import help.Form.LoginForm;
 import help.common.Result;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import spring.redis.manager.RedisManager;
 import help.util.Internet;
+import spring.redis.model.User;
 import spring.redis.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,16 +40,6 @@ public class testController {
     public Object sessions (HttpServletRequest request){
         Map<String, Object> map = new HashMap<>();
         String sessionId=request.getSession().getId();
-//        System.out.println("request.getSession().getId()"+sessionId);
-//        sessionId=request.getRequestedSessionId();
-//        System.out.println("request.getRequestedSessionId()"+sessionId);
-//        sessionId=request.getSession().toString();
-//        System.out.println("request.getSession().toString()"+sessionId);
-//
-//        redisManager.set(sessionId,"123456789");
-//        map.put("sessionId", sessionId);
-//        String value;
-//        map.put("message", request.getSession().getAttribute("map"));
         Set<String> set=redisManager.getKeys("*");
         if (set.isEmpty()){
             System.out.println("没有session!");
@@ -58,19 +52,6 @@ public class testController {
         return map;
     }
 
-
-    @ResponseBody
-    @RequestMapping(value = "/myIp")
-    @ApiOperation(value = "获取本机ip",httpMethod = "POST",notes = "返回操作结果")
-    public Result<String> showHotProjects(){
-        try {
-            String ip= Internet.getLocalHostLANAddress().getHostAddress();
-            return Result.getSuccessResult(ip);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
     @ResponseBody
     @RequestMapping(value = "/flush")
     @ApiOperation(value = "清空redis缓存",httpMethod = "POST",notes = "返回操作结果")
@@ -94,15 +75,12 @@ public class testController {
         }
         return Result.getSuccessResult("redis已清空");
     }
-
-    @RequestMapping("/login")
-    public String login(HttpServletRequest request,LoginForm form){
-        String sessionId=request.getSession().getId();
-        Boolean b=userService.Login(form,sessionId);
-        if (b.equals(Boolean.TRUE)){
-            return "success";
-        }else {
-            return "login";
-        }
+    @ApiOperation(value = "djjjjjjjjjj")
+    @RequestMapping(value = "/testswagger",method = RequestMethod.GET)
+    public ModelAndView toAddPage(ModelAndView mView){
+            mView.addObject("employee",new User());
+            mView.setViewName("index");
+            mView.addObject("departments", userService.selectTen());
+            return mView;
     }
 }

@@ -35,7 +35,7 @@ public class RedisConfig {
         return config;
     }
 
-    @Bean
+    @Bean(name = "JedisPool")
     public JedisPool getJedisPool(){
         JedisPoolConfig config = getRedisConfig();
         JedisPool pool = new JedisPool(config,hostName,port,timeout,password);
@@ -43,5 +43,3 @@ public class RedisConfig {
         return pool;
     }
 }
-
-

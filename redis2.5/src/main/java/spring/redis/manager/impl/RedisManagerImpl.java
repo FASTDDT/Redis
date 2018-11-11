@@ -79,6 +79,13 @@ class RedisManagerImpl implements RedisManager {
     }
 
     @Override
+    public Boolean exists(String key) {
+        jedis=getResource();
+        Boolean b=jedis.exists(key);
+        return b;
+    }
+
+    @Override
     public Set<String> getKeys(String word) {
         jedis=getResource();
         Set<String> values=jedis.keys(word);
