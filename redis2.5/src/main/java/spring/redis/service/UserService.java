@@ -10,6 +10,7 @@ public interface UserService {
     List<User> selectTen();
     Boolean Login(LoginForm form,String sessionid);
     UserVo getUserVo(Long userId);
+    Boolean regist(LoginForm form);
 
 
 }

@@ -2,7 +2,7 @@ package spring.redis.controller;
 
 import help.Form.LoginForm;
 import help.common.Result;
-import io.swagger.annotations.Api;
+import help.util.MapAndEntity;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import spring.redis.manager.RedisManager;
-import help.util.Internet;
 import spring.redis.model.User;
 import spring.redis.service.UserService;
 
@@ -33,6 +32,7 @@ public class testController {
         map.put("request Url", request.getRequestURL());
         return map;
     }
+
 
     @ResponseBody
     @RequestMapping(value = "/sessions")
@@ -83,4 +83,22 @@ public class testController {
             mView.addObject("departments", userService.selectTen());
             return mView;
     }
+
+    @RequestMapping(value = "/login")
+    @ApiOperation(value = "自动登录", httpMethod = "POST", notes = "返回操作结果")
+    public Map<String,String> login(LoginForm form,HttpServletRequest request) {
+        Map<String,String> map=new HashMap <>();
+        String s=request.getSession().getId();
+
+        userService.Login(form,s);
+        map.put(s,form.getNickName());
+        return map;
+    }
+    @RequestMapping(value = "regist")
+    public Map <String, Object> login(LoginForm form) {
+       userService.regist(form);
+
+        return MapAndEntity.objectToMap(form);
+    }
+
 }

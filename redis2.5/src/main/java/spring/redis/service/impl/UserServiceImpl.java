@@ -46,6 +46,15 @@ public class UserServiceImpl implements UserService {
 
         return userManager.creatUserVo(user);
     }
+
+    @Override
+    public Boolean regist(LoginForm form) {
+        User user=new User();
+        user.setUserId(Long.getLong(form.getNickName()));
+        user.setUserPassword(form.getPassword());
+
+        return userManager.insert(user);
+    }
 //
 //    @Override
 //    public List <User> selectTen2() {

@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import spring.redis.manager.RedisManager;
+import spring.redis.model.TicketInfo;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -98,12 +101,14 @@ class RedisManagerImpl implements RedisManager {
         jedis.flushAll();
     }
 
+    @Override
+    public String hmset(TicketInfo ticketInfo) {
+        jedis=getResource();
+        Map<String,String> map=new HashMap <>();
+        map.put("","");
 
-
-
-
-
-
+        return jedis.hmset("hm",map);
+    }
 
 
 }

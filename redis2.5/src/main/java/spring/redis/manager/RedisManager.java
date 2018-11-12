@@ -1,6 +1,7 @@
 package spring.redis.manager;
 
 import redis.clients.jedis.Jedis;
+import spring.redis.model.TicketInfo;
 
 import java.util.Set;
 
@@ -25,6 +26,8 @@ public interface RedisManager {
     Set <String> getKeys(String word);
 
     void flushCache();
+
+    String hmset(TicketInfo ticketInfo);
 
 
 }

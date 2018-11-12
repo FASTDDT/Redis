@@ -63,5 +63,8 @@ public class HelpController {
         }
         return Result.getSuccessResult(userVo);
     }
-
+    @RequestMapping(value = "/test")
+    public String test(){
+        return "test";
+    }
 }

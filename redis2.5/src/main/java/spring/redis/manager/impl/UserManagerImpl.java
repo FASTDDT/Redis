@@ -138,7 +138,7 @@ public class UserManagerImpl extends ServiceImpl<UserMapper, User> implements Us
         String pwd=form.getPassword();
         Wrapper<User> wrapper=new EntityWrapper <>();
         wrapper.where("1={0}",1)
-                .eq("user_nickname",nickname)
+                .eq("user_id",nickname)
                 .eq("user_password",pwd)
                 .eq("is_deleted", DeleteEnum.NOT_DELETE.getCode());
         if (wrapper!=null){

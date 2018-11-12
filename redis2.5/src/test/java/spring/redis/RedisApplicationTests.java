@@ -1,5 +1,6 @@
 package spring.redis;
 
+import help.util.MapAndEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,7 @@ import spring.redis.service.UserService;
 import help.util.Internet;
 
 import java.net.InetAddress;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,7 +38,7 @@ public class RedisApplicationTests {
     @Test
     public void Ip() {
         try {
-            String string=Internet.getLocalHostLANAddress().getHostAddress();
+            String string = Internet.getLocalHostLANAddress().getHostAddress();
             System.out.println(string);
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,12 +126,45 @@ public class RedisApplicationTests {
     @Test
     public void getPath() {
         try {
-            InetAddress address=Internet.getLocalHostLANAddress();
-            System.out.println("HostAddress:"+address.getHostAddress());
-            System.out.println("HostName"+address.getHostName());
-            System.out.println("getAddress"+address.getAddress());
+            InetAddress address = Internet.getLocalHostLANAddress();
+            System.out.println("HostAddress:" + address.getHostAddress());
+            System.out.println("HostName" + address.getHostName());
+            System.out.println("getAddress" + address.getAddress());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+    @Test
+    public void entityAndMap(){
+        User user=userManager.selectById(2014122752);
+        Map<String,Object> map=MapAndEntity.objectToMap(user);
+        System.out.println("values");
+        for (Object o:map.values()
+             ) {
+            System.out.println(o.toString());
+        }
+        System.out.println("keys");
+        for (Object o:map.keySet()
+        ) {
+            System.out.println(o.toString());
+        }
+        System.out.println("keyAndValue");
+        for (Object o:map.entrySet()
+        ) {
+            System.out.println(o.toString());
+        }
+        System.out.println("lamda");
+        map.forEach((key,value)-> System.out.println(key+"\t"+value));
+        System.out.println("map to obj");
+        User user1= (User) MapAndEntity.mapToObject(map,User.class);
+        System.out.println(user1.getUserRealname());
+        map.remove("gmtCreate");
+        System.out.println("map to obj -1");
+        user1=(User) MapAndEntity.mapToObject(map,User.class);
+        System.out.println(user1.getUserRealname());
+
+    }
+
 }

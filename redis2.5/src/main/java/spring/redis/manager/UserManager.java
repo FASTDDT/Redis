@@ -39,4 +39,6 @@ public interface UserManager extends IService<User> {
 
     User getUser(Long userId);
     UserVo creatUserVo(User user);
+
+
 }
