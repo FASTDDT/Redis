@@ -163,7 +163,7 @@ public class RedisApplicationTests {
         map.remove("gmtCreate");
         System.out.println("map to obj -1");
         user1=(User) MapAndEntity.mapToObject(map,User.class);
-        System.out.println(user1.getUserRealname());
+        System.out.println(user1.getGmtCreate());
 
     }
 
