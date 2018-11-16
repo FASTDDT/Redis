@@ -3,6 +3,7 @@ package spring.redis.manager;
 import redis.clients.jedis.Jedis;
 import spring.redis.model.TicketInfo;
 
+import java.util.Map;
 import java.util.Set;
 
 public interface RedisManager {
@@ -26,8 +27,14 @@ public interface RedisManager {
     Set <String> getKeys(String word);
 
     void flushCache();
+//
+//    Map<String,Object> remove(Map<String,String> map);
+//
+//    Boolean setTicket(TicketInfo ticketInfo);
 
-    String hmset(TicketInfo ticketInfo);
+
+
+
 
 
 }

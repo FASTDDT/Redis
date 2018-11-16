@@ -62,4 +62,50 @@ public class MapAndEntity {
         }
         return obj;
     }
+    /**
+     *      Obj--->Map<String,String>
+     */
+    public static Map<String, String> objectToStringMap(Object obj) {
+        Map <String, String> map = new HashMap<>();
+        if (obj == null) {
+            return map;
+        }
+        Class clazz = obj.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        try {
+            for (Field field : fields) {
+                field.setAccessible(true);
+                map.put(field.getName(), field.get(obj).toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+
+
+    public static Object Test(Map <String, String> map, Class <?> clazz) {
+        if (map == null) {
+            return null;
+        }
+        Object obj = null;
+        try {
+            obj = clazz.newInstance();
+            Field[] fields = obj.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                int mod = field.getModifiers();
+                if (Modifier.isStatic(mod) || Modifier.isFinal(mod)) {
+                    continue;
+                }
+                Integer integer;
+                System.out.println(field.getType());
+                field.setAccessible(true);
+//                field.set(obj, field.getType().cast(map.get(field.getName())));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return obj;
+}
 }

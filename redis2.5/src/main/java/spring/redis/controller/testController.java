@@ -94,11 +94,11 @@ public class testController {
         map.put(s,form.getNickName());
         return map;
     }
-    @RequestMapping(value = "regist")
-    public Map <String, Object> login(LoginForm form) {
-       userService.regist(form);
-
-        return MapAndEntity.objectToMap(form);
-    }
+//    @RequestMapping(value = "regist")
+//    public Map <String, String> login(LoginForm form) {
+//       userService.regist(form);
+//
+//        return MapAndEntity.objectToMap(form);
+//    }
 
 }

@@ -146,9 +146,9 @@ public class RedisApplicationTests {
             System.out.println(o.toString());
         }
         System.out.println("keys");
-        for (Object o:map.keySet()
+        for (String o:map.keySet()
         ) {
-            System.out.println(o.toString());
+            System.out.println(o);
         }
         System.out.println("keyAndValue");
         for (Object o:map.entrySet()
@@ -164,6 +164,34 @@ public class RedisApplicationTests {
         System.out.println("map to obj -1");
         user1=(User) MapAndEntity.mapToObject(map,User.class);
         System.out.println(user1.getGmtCreate());
+
+    }
+    @Test
+    public void stringMap(){
+        User user=userManager.selectById(2014122752);
+        Map<String,String> map=MapAndEntity.objectToStringMap(user);
+        map.forEach((key,value)-> System.out.println(key+"\t"+value));
+        System.out.println("============================================================");
+
+        String sm="3333";
+//        System.out.println("Integer.class.cast(sm);"+"\t");
+//
+//        System.out.println("Integer.class.cast(sm);"+"\t"+Integer.class.cast(sm));
+        System.out.println("============================================================");
+        if (user  instanceof User)
+            for (int i=0;i<10;i++){
+                System.out.println(user  instanceof User);
+            }
+//        Map<String,String>map1=MapAndEntity.objectToStringMap(user);
+//        User user1=(User) MapAndEntity.Test(map1,User.class);
+//
+//        System.out.println(user1.getGmtCreate()+"\t"+user1.getUserId());
+
+        //MapAndEntity.mapToObject(map,User.class);
+        System.out.println("user.getClass().getName():  "+user.getClass().getName());
+        System.out.println("============================================================");
+        //MapAndEntity.mapToObject(map,User.class);
+
 
     }
 
