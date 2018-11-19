@@ -28,11 +28,12 @@ public class TestController {
                         System.out.println(fieldError.getField()+"\t"+fieldError.getDefaultMessage());
             }
             );
-        }
 
-        request.setAttribute("map", map);
-        request.setAttribute("hi","......................");
-        return "test";
+            request.setAttribute("map", map);
+            request.setAttribute("hi","......................");
+            return "test";
+        }
+        return "success";
     }
 
 }
