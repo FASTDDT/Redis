@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,7 +8,8 @@
 </head>
 <body>
 这是首页.....
-`   <div id="img">
+`
+<div id="img">
 
 </div>
 <button id="getkeys" type="button" onclick="getkeys()">getkeys</button>
@@ -31,9 +32,20 @@
 <hr/>
 <p>多文件上传</p>
 <form method="POST" enctype="multipart/form-data" action="batch">
-    <p>文件1：<input type="file" name="file"/></p>
-    <p>文件2：<input type="file" name="file"/></p>
+    <p>文件1：<input type="file" name="file1"/></p>
+    <p>文件2：<input type="file" name="file2"/></p>
     <p><input type="submit" value="上传"/></p>
+</form>
+<hr/>
+<form method="POST" action="regist">
+    <p><input name="phone"></p>
+    <!--<p th:if="${map?.phone} "><span th:text="${map.phone}"></span></p>-->
+    <p><input name="nickname"></p>
+    <!--<p th:if="${map?.nickname} "><span th:text="${map.nickname}"></span></p>-->
+    <p><input name="email"></p>
+    <!--<p th:if="${hi} "><span th:text="${hi}"></span></p>-->
+
+    <p><input type="submit" value="注册"/></p>
 </form>
 </body>
 </html>

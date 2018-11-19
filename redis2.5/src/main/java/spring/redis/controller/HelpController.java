@@ -15,6 +15,8 @@ import spring.redis.service.RedisService;
 import spring.redis.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -64,7 +66,12 @@ public class HelpController {
         return Result.getSuccessResult(userVo);
     }
     @RequestMapping(value = "/test")
-    public String test(){
+    public String test(HttpServletRequest request){
+        try {
+            return "test";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return "test";
     }
 

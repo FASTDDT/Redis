@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.datetime.joda.LocalDateTimeParser;
 import org.springframework.test.context.junit4.SpringRunner;
 import spring.redis.manager.CommentManager;
 import spring.redis.manager.RedisManager;
@@ -15,6 +17,10 @@ import spring.redis.service.UserService;
 import help.util.Internet;
 
 import java.net.InetAddress;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -137,50 +143,51 @@ public class RedisApplicationTests {
 
 
     @Test
-    public void entityAndMap(){
-        User user=userManager.selectById(2014122752);
-        Map<String,Object> map=MapAndEntity.objectToMap(user);
+    public void entityAndMap() {
+        User user = userManager.selectById(2014122752);
+        Map <String, Object> map = MapAndEntity.objectToMap(user);
         System.out.println("values");
-        for (Object o:map.values()
-             ) {
+        for (Object o : map.values()
+        ) {
             System.out.println(o.toString());
         }
         System.out.println("keys");
-        for (String o:map.keySet()
+        for (String o : map.keySet()
         ) {
             System.out.println(o);
         }
         System.out.println("keyAndValue");
-        for (Object o:map.entrySet()
+        for (Object o : map.entrySet()
         ) {
             System.out.println(o.toString());
         }
         System.out.println("lamda");
-        map.forEach((key,value)-> System.out.println(key+"\t"+value));
+        map.forEach((key, value) -> System.out.println(key + "\t" + value));
         System.out.println("map to obj");
-        User user1= (User) MapAndEntity.mapToObject(map,User.class);
+        User user1 = (User) MapAndEntity.mapToObject(map, User.class);
         System.out.println(user1.getUserRealname());
         map.remove("gmtCreate");
         System.out.println("map to obj -1");
-        user1=(User) MapAndEntity.mapToObject(map,User.class);
+        user1 = (User) MapAndEntity.mapToObject(map, User.class);
         System.out.println(user1.getGmtCreate());
 
     }
+
     @Test
-    public void stringMap(){
-        User user=userManager.selectById(2014122752);
-        Map<String,String> map=MapAndEntity.objectToStringMap(user);
-        map.forEach((key,value)-> System.out.println(key+"\t"+value));
+    public void stringMap() {
+        User user = userManager.selectById(2014122752);
+        Map <String, String> map = MapAndEntity.objectToStringMap(user);
+        map.forEach((key, value) -> System.out.println(key + "\t" + value));
         System.out.println("============================================================");
 
-        String sm="3333";
+        String sm = "3333";
 //        System.out.println("Integer.class.cast(sm);"+"\t");
 //
 //        System.out.println("Integer.class.cast(sm);"+"\t"+Integer.class.cast(sm));
         System.out.println("============================================================");
-        if (user  instanceof User)
-            for (int i=0;i<10;i++){
-                System.out.println(user  instanceof User);
+        if (user instanceof User)
+            for (int i = 0; i < 10; i++) {
+                System.out.println(user instanceof User);
             }
 //        Map<String,String>map1=MapAndEntity.objectToStringMap(user);
 //        User user1=(User) MapAndEntity.Test(map1,User.class);
@@ -188,11 +195,32 @@ public class RedisApplicationTests {
 //        System.out.println(user1.getGmtCreate()+"\t"+user1.getUserId());
 
         //MapAndEntity.mapToObject(map,User.class);
-        System.out.println("user.getClass().getName():  "+user.getClass().getName());
+        System.out.println("user.getClass().getName():  " + user.getClass().getName());
         System.out.println("============================================================");
         //MapAndEntity.mapToObject(map,User.class);
 
 
     }
 
+    @Test
+    public void timeTest() throws Exception{
+//        String localDateTime = (String) LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY//MM//DD//HH//MM//ss"));
+//        System.out.println("localDateTime:" + localDateTime);
+//        LocalDate localdate = LocalDate.parse("2018//07//11//02//22//01");
+//        System.out.println("localDateTime:"+localDateTime.toString());
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
+        String text = today.format(formatters);
+        System.out.println("Localdate.format"+text);
+        LocalDateTime now=LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy//MM//dd//HH//mm//ss");
+        LocalDateTime dateTime = LocalDateTime.now();
+        String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"
+        System.out.println("formattedDateTime:"+formattedDateTime);
+    }
+
+
 }
+
+
+

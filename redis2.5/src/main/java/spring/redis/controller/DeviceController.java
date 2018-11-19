@@ -1,17 +1,20 @@
 package spring.redis.controller;
 
 
+import help.util.FileLoad;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -27,33 +30,9 @@ import java.util.List;
 public class DeviceController {
 
     @RequestMapping(value = "/upload")
-    public String upload(@RequestParam("file") MultipartFile file) {
-        try {
-            if (file.isEmpty()) {
-                return "文件为空";
-            }
-            // 获取文件名
-            String fileName = file.getOriginalFilename();
-            log.info("上传的文件名为：" + fileName);
-            // 获取文件的后缀名
-            String suffixName = fileName.substring(fileName.lastIndexOf("."));
-            log.info("文件的后缀名为：" + suffixName);
-            // 设置文件存储路径
-            String filePath = "E:/mydownload/upload/";
-            String path = filePath + fileName;
-            File dest = new File(path);
-            // 检测是否存在目录
-            if (!dest.getParentFile().exists()) {
-                dest.getParentFile().mkdirs();// 新建文件夹
-            }
-            file.transferTo(dest);// 文件写入
-            return "上传成功";
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "上传失败";
+    public String upload(@RequestParam("file") MultipartFile file) throws IOException {
+        FileLoad.upLoadFile(file);
+        return "index";
     }
     @GetMapping("/download")
     public String downloadFile(HttpServletRequest request, HttpServletResponse response) {
@@ -100,6 +79,19 @@ public class DeviceController {
         }
         return "下载失败";
     }
+    @RequestMapping(value = "/batch")
+    public void moreFileUp(MultipartRequest mr){
+        Map<String,MultipartFile> map=mr.getFileMap();
+        map.forEach((key,value)-> {
+            System.out.println("file="+value.getOriginalFilename());
+            try {
+                FileLoad.upLoadFile(value);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
+
+    }
 }
 

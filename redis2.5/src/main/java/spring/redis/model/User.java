@@ -13,6 +13,10 @@ import com.baomidou.mybatisplus.annotations.Version;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * <p>
@@ -39,6 +43,7 @@ public class User extends Model<User> {
     /**
      * 用户昵称
      */
+    @NotNull(message = "写个昵称吧！")
     @TableField("user_nickname")
     private String userNickname;
     /**
@@ -64,6 +69,7 @@ public class User extends Model<User> {
     /**
      * 用户电话
      */
+
     @TableField("user_phone")
     private String userPhone;
     /**
