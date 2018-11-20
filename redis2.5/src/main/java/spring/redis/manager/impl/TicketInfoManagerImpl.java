@@ -1,10 +1,14 @@
 package spring.redis.manager.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import spring.redis.model.TestUnion;
 import spring.redis.model.TicketInfo;
 import spring.redis.mapper.TicketInfoMapper;
 import spring.redis.manager.TicketInfoManager;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +20,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TicketInfoManagerImpl extends ServiceImpl<TicketInfoMapper, TicketInfo> implements TicketInfoManager {
+    @Autowired
+    TicketInfoMapper ticketInfoMapper;
+    @Override
+    public List<TestUnion> getUnion() {
 
+        return ticketInfoMapper.unionDemo();
+    }
 }

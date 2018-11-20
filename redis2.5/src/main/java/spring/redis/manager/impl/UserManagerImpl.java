@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
 import help.Enum.DeleteEnum;
 import help.Form.LoginForm;
 import help.Vo.UserVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import spring.redis.model.TestUnion;
 import spring.redis.model.User;
 import spring.redis.mapper.UserMapper;
 import spring.redis.manager.UserManager;
@@ -30,7 +32,8 @@ import java.util.Timer;
  */
 @Service
 public class UserManagerImpl extends ServiceImpl<UserMapper, User> implements UserManager{
-
+    @Autowired
+    UserMapper userMapper;
     Random r=new Random();
     Timer timer=new Timer();
     @Override
@@ -159,6 +162,18 @@ public class UserManagerImpl extends ServiceImpl<UserMapper, User> implements Us
         UserVo userVo=new UserVo();
         userVo.setNickname(user.getUserNickname());
         return userVo;
+    }
+
+    @Override
+    public List <User> testSelect() {
+        List<User> wrapper=userMapper.getUserList();
+        return wrapper;
+    }
+
+    @Override
+    public List <User> testSelectSome() {
+        List<User> users=userMapper.getSome();
+        return users;
     }
 
 

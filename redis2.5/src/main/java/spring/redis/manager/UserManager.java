@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import help.Form.LoginForm;
 import help.Vo.UserVo;
 import spring.redis.mapper.UserMapper;
+import spring.redis.model.TestUnion;
 import spring.redis.model.User;
 import com.baomidou.mybatisplus.service.IService;
 
@@ -40,5 +41,7 @@ public interface UserManager extends IService<User> {
     User getUser(Long userId);
     UserVo creatUserVo(User user);
 
+    List<User> testSelect();
 
+    List<User> testSelectSome();
 }

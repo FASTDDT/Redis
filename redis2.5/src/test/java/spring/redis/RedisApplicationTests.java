@@ -1,31 +1,36 @@
 package spring.redis;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import help.util.MapAndEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.datetime.joda.LocalDateTimeParser;
 import org.springframework.test.context.junit4.SpringRunner;
 import spring.redis.manager.CommentManager;
 import spring.redis.manager.RedisManager;
+import spring.redis.manager.TicketInfoManager;
 import spring.redis.manager.UserManager;
+import spring.redis.mapper.TicketInfoMapper;
+import spring.redis.model.TestUnion;
 import spring.redis.model.User;
 import spring.redis.service.UserService;
 import help.util.Internet;
+import springfox.documentation.spring.web.json.Json;
 
 import java.net.InetAddress;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RedisApplicationTests {
+    @Autowired
+    TicketInfoManager ticketInfoManager;
     @Autowired
     RedisManager redisManager;
     @Autowired
@@ -84,7 +89,6 @@ public class RedisApplicationTests {
     @Test
     public void Injection() {
         commentManager.deleteAll();
-
     }
 
     @Test
@@ -218,8 +222,24 @@ public class RedisApplicationTests {
         String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"
         System.out.println("formattedDateTime:"+formattedDateTime);
     }
+    @Test
+    public void testUserMapperSql(){
+        List<User>users=userManager.testSelect();
+        AtomicInteger i= new AtomicInteger();
+        users.forEach(user -> System.out.println(i.getAndIncrement() +""+user.getUserId()));
+    }
+    @Test
+    public void testUserMapperSelectSome(){
+        List<User>users=userManager.testSelectSome();
+        AtomicInteger i= new AtomicInteger();
+        users.forEach(user -> System.out.println(i.getAndIncrement() +"\t"+user.getUserId()+"\t"+user.getVersion()));
+    }
 
-
+    @Test
+    public void testUnion() {
+        List<TestUnion> list=ticketInfoManager.getUnion();
+        list.forEach(u-> System.out.println(u.getId()+"\t"+u.getTicketTimes()+"\t"+u.getProject().getCapacity()));
+    }
 }
 
 

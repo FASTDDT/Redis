@@ -4,30 +4,27 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="spring.redis.model.User">
-        <id column="user_id" property="userId" />
-        <result column="version" property="version" />
-        <result column="user_nickname" property="userNickname" />
-        <result column="user_realname" property="userRealname" />
-        <result column="user_account" property="userAccount" />
-        <result column="user_password" property="userPassword" />
-        <result column="user_sex" property="userSex" />
-        <result column="user_phone" property="userPhone" />
-        <result column="user_point" property="userPoint" />
-        <result column="user_money" property="userMoney" />
-        <result column="user_role" property="userRole" />
-        <result column="is_deleted" property="isDeleted" />
-        <result column="gmt_create" property="gmtCreate" />
-        <result column="gmt_modify" property="gmtModify" />
-        <result column="login_status" property="loginStatus" />
-        <result column="last_login_time" property="lastLoginTime" />
+        <id column="user_id" property="userId"/>
+        <result column="version" property="version"/>
+        <result column="user_nickname" property="userNickname"/>
+        <result column="user_realname" property="userRealname"/>
+        <result column="user_account" property="userAccount"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="user_sex" property="userSex"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_point" property="userPoint"/>
+        <result column="user_money" property="userMoney"/>
+        <result column="user_role" property="userRole"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modify" property="gmtModify"/>
+        <result column="login_status" property="loginStatus"/>
+        <result column="last_login_time" property="lastLoginTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         version, user_id, user_nickname, user_realname, user_account, user_password, user_sex, user_phone, user_point, user_money, user_role, is_deleted, gmt_create, gmt_modify, login_status, last_login_time
     </sql>
-    <select id="selectUserList" resultType="User">
-      SELECT * FROM user WHERE version=#{version}
-    </select>
 </mapper>
 

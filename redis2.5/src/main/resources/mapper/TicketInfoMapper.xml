@@ -4,24 +4,38 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="spring.redis.model.TicketInfo">
-        <id column="ID" property="id" />
-        <result column="ticket_id" property="ticketId" />
-        <result column="ticket_times" property="ticketTimes" />
-        <result column="ticket_name" property="ticketName" />
-        <result column="project_id" property="projectId" />
-        <result column="lefts" property="lefts" />
-        <result column="price" property="price" />
-        <result column="Begintime" property="Begintime" />
-        <result column="Overtime" property="Overtime" />
-        <result column="remark" property="remark" />
-        <result column="is_deleted" property="isDeleted" />
-        <result column="gmt_create" property="gmtCreate" />
-        <result column="gmt_modify" property="gmtModify" />
+        <id column="ID" property="id"/>
+        <result column="ticket_id" property="ticketId"/>
+        <result column="ticket_times" property="ticketTimes"/>
+        <result column="ticket_name" property="ticketName"/>
+        <result column="project_id" property="projectId"/>
+        <result column="lefts" property="lefts"/>
+        <result column="price" property="price"/>
+        <result column="Begintime" property="Begintime"/>
+        <result column="Overtime" property="Overtime"/>
+        <result column="remark" property="remark"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modify" property="gmtModify"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         ID, ticket_id, ticket_times, ticket_name, project_id, lefts, price, Begintime, Overtime, remark, is_deleted, gmt_create, gmt_modify
     </sql>
-
+    <select id="unionDemo" resultMap="UnionSearch">
+         select * from ticket_info t, project p where t.project_id=p.project_id limit 1,3
+     </select>
+    <resultMap id="UnionSearch" type="spring.redis.model.TestUnion">
+        <id column="ID" property="id"/>
+        <result column="ticket_id" property="ticketId"/>
+        <result column="ticket_times" property="ticketTimes"/>
+        <result column="ticket_name" property="ticketName"/>
+        <result column="project_id" property="projectId"/>
+        <association property="project" column="project_id" javaType="spring.redis.model.Project"
+                     select="selectProject"/>
+    </resultMap>
+    <select id="selectProject" parameterType="int" resultType="spring.redis.model.Project">
+        select * from project where project_id=#{id}
+    </select>
 </mapper>

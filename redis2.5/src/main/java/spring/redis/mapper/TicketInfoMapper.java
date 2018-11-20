@@ -1,7 +1,10 @@
 package spring.redis.mapper;
 
+import spring.redis.model.TestUnion;
 import spring.redis.model.TicketInfo;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface TicketInfoMapper extends BaseMapper<TicketInfo> {
 
+    List<TestUnion> unionDemo();
 }

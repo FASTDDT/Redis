@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.plugins.PerformanceInterceptor;
 import com.baomidou.mybatisplus.plugins.SqlExplainInterceptor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -16,14 +17,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //Spring boot方式
 @EnableTransactionManagement
 @Configuration
+@Slf4j
 public class MybatisPlusConfig {
-    Logger logger = LoggerFactory.getLogger(MybatisPlusConfig.class);
     /**
      * 分页插件
      */
     @Bean(name = "Page")
     public PaginationInterceptor paginationInterceptor() {
-            logger.info("paginationInterceptor");
+            log.info("paginationInterceptor");
         return new PaginationInterceptor();
     }
 
@@ -33,7 +34,7 @@ public class MybatisPlusConfig {
      */
     @Bean(name = "OptimisticLockerInterceptor")
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {
-        logger.info("OptimisticLockerInterceptor");
+        log.info("OptimisticLockerInterceptor");
         return new OptimisticLockerInterceptor();
     }
 
@@ -43,7 +44,7 @@ public class MybatisPlusConfig {
      */
     @Bean(name = "performanceInterceptor")
     public PerformanceInterceptor performanceInterceptor() {
-        logger.info("performanceInterceptor");
+        log.info("performanceInterceptor");
         PerformanceInterceptor performanceInterceptor=new PerformanceInterceptor();
         performanceInterceptor.setMaxTime(100)
                 .setFormat(true);
@@ -61,7 +62,7 @@ public class MybatisPlusConfig {
      */
     @Bean(name = "SqlExplainInterceptor")
     public SqlExplainInterceptor sqlExplainInterceptor(){
-        logger.info("sqlExplainInterceptor");
+        log.info("sqlExplainInterceptor");
         SqlExplainInterceptor sqlExplainInterceptor=new SqlExplainInterceptor();
         sqlExplainInterceptor.setStopProceed(false);//当其为true时发现全表操作终止之
         return sqlExplainInterceptor;
@@ -75,7 +76,7 @@ public class MybatisPlusConfig {
 //    public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ResourceLoader resourceLoader, GlobalConfiguration globalConfiguration) throws Exception {
 //        MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
 //        sqlSessionFactory.setDataSource(dataSource);
-//        sqlSessionFactory.setTypeAliasesPackage("com.baomidou.mybatisplus.test.h2.entity.persistent");
+//        sqlSessionFactory.setTypeAliasesPackage("");
 //        MybatisConfiguration configuration = new MybatisConfiguration();
 //        configuration.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
 //        configuration.setJdbcTypeForNull(JdbcType.NULL);
