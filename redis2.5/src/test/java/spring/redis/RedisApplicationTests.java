@@ -1,6 +1,5 @@
 package spring.redis;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import help.util.MapAndEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,20 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import spring.redis.manager.CommentManager;
 import spring.redis.manager.RedisManager;
 import spring.redis.manager.TicketInfoManager;
 import spring.redis.manager.UserManager;
-import spring.redis.mapper.TicketInfoMapper;
 import spring.redis.model.TestUnion;
 import spring.redis.model.User;
 import spring.redis.service.UserService;
 import help.util.Internet;
-import springfox.documentation.spring.web.json.Json;
-
-import javax.annotation.Resource;
 import java.net.InetAddress;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,11 +27,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 @SpringBootTest
 public class RedisApplicationTests {
     @Autowired
+    RedisManager redisManager;
+
+    @Autowired
     RedisTemplate<Object,Object> template;
     @Autowired
     TicketInfoManager ticketInfoManager;
-    @Autowired
-    RedisManager redisManager;
     @Autowired
     CommentManager commentManager;
     @Autowired
@@ -190,33 +185,17 @@ public class RedisApplicationTests {
         System.out.println("============================================================");
 
         String sm = "3333";
-//        System.out.println("Integer.class.cast(sm);"+"\t");
-//
-//        System.out.println("Integer.class.cast(sm);"+"\t"+Integer.class.cast(sm));
         System.out.println("============================================================");
         if (user instanceof User)
             for (int i = 0; i < 10; i++) {
                 System.out.println(user instanceof User);
             }
-//        Map<String,String>map1=MapAndEntity.objectToStringMap(user);
-//        User user1=(User) MapAndEntity.Test(map1,User.class);
-//
-//        System.out.println(user1.getGmtCreate()+"\t"+user1.getUserId());
-
-        //MapAndEntity.mapToObject(map,User.class);
         System.out.println("user.getClass().getName():  " + user.getClass().getName());
         System.out.println("============================================================");
-        //MapAndEntity.mapToObject(map,User.class);
-
-
     }
 
     @Test
-    public void timeTest() throws Exception{
-//        String localDateTime = (String) LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY//MM//DD//HH//MM//ss"));
-//        System.out.println("localDateTime:" + localDateTime);
-//        LocalDate localdate = LocalDate.parse("2018//07//11//02//22//01");
-//        System.out.println("localDateTime:"+localDateTime.toString());
+    public void timeTest(){
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
         String text = today.format(formatters);
@@ -247,6 +226,22 @@ public class RedisApplicationTests {
     }
     @Test
     public void redisTempl(){
+
+//        Map<String,String> getMap=redisManager.getHashMap("xxkey");
+//        getMap.forEach((key,value)-> System.out.println(key+"\t"+value));
+//        map.clear();
+//        for (int i=10; i<25;i++){
+//            map.put(""+i,""+i);
+//        }
+//        System.out.println("==========================================");
+//        redisManager.getHashMap("xxkey").forEach((key,value)-> System.out.println(key+"\t"+value));
+        redisManager.set("sss","ddd");
+        System.out.println("set 成功");
+        Map<String,String> map=new HashMap <>();
+        for (int i=0; i<5;i++){
+            map.put(""+i,""+i);
+        }
+        redisManager.setHashMap("derkey",map);
     }
 }
 

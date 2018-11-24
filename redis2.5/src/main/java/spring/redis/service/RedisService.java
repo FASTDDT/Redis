@@ -5,7 +5,9 @@ import java.util.Map;
 
 public interface RedisService {
 
-    List<Map<String,String>> getUserOrder(String userid);
+//    List<Map<String,String>> getUserOrder(String userid);
+//
+//    Boolean createOrder(Long userId,String )
 
 
 

@@ -34,6 +34,10 @@ public interface RedisManager {
 
     Boolean fieldIncr(String key,String field,Long amount);
 
+    Boolean setExpire(String key,Integer seconds);
+
+    Boolean persist(String key);
+
 
 
 
