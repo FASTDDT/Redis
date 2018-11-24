@@ -27,10 +27,14 @@ public interface RedisManager {
     Set <String> getKeys(String word);
 
     void flushCache();
-//
-//    Map<String,Object> remove(Map<String,String> map);
-//
-//    Boolean setTicket(TicketInfo ticketInfo);
+
+    Map<String,String> getHashMap(String key);
+
+    Boolean setHashMap(String key,Map<String,String> map);
+
+    Boolean fieldIncr(String key,String field,Long amount);
+
+
 
 
 

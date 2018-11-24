@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import spring.redis.manager.CommentManager;
 import spring.redis.manager.RedisManager;
@@ -19,6 +21,7 @@ import spring.redis.service.UserService;
 import help.util.Internet;
 import springfox.documentation.spring.web.json.Json;
 
+import javax.annotation.Resource;
 import java.net.InetAddress;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,6 +32,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RedisApplicationTests {
+    @Autowired
+    RedisTemplate<Object,Object> template;
     @Autowired
     TicketInfoManager ticketInfoManager;
     @Autowired
@@ -239,6 +244,9 @@ public class RedisApplicationTests {
     public void testUnion() {
         List<TestUnion> list=ticketInfoManager.getUnion();
         list.forEach(u-> System.out.println(u.getId()+"\t"+u.getTicketTimes()+"\t"+u.getProject().getCapacity()));
+    }
+    @Test
+    public void redisTempl(){
     }
 }
 

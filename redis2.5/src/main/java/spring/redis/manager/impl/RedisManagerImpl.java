@@ -103,7 +103,27 @@ class RedisManagerImpl implements RedisManager {
     public void flushCache() {
         jedis = getResource();
         jedis.flushAll();
+
     }
+
+    @Override
+    public Map <String, String> getHashMap(String key) {
+        jedis=getResource();
+        Map<String,String> map=jedis.hgetAll(key);
+        return map;
+    }
+
+    @Override
+    public Boolean setHashMap(String key, Map <String, String> map) {
+        return jedis.hmset(key,map).equals("OK");
+    }
+
+    @Override
+    public Boolean fieldIncr(String key, String field, Long amount) {
+
+        return jedis.hincrBy(key,field,amount)>=0;
+    }
+
 
 //    @Override
 //    public String hmset(TicketInfo ticketInfo) {
