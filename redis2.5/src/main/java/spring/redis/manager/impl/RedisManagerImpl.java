@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.Pipeline;
 import spring.redis.manager.RedisManager;
 import spring.redis.model.TicketInfo;
 
@@ -150,6 +151,13 @@ class RedisManagerImpl implements RedisManager, CommandLineRunner {
         Long k=jedis.persist(key);
         returnResource(jedis);
         return k==1L;
+    }
+
+    @Override
+    public void executePipeline(Pipeline pipeline) {
+        jedis=getResource();
+        pipeline.sync();
+        returnResource(jedis);
     }
 
     @Override

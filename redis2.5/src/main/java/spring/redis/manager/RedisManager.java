@@ -1,6 +1,7 @@
 package spring.redis.manager;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Pipeline;
 import spring.redis.model.TicketInfo;
 
 import java.util.Map;
@@ -37,6 +38,8 @@ public interface RedisManager {
     Boolean setExpire(String key,Integer seconds);
 
     Boolean persist(String key);
+
+    void executePipeline(Pipeline pipeline);
 
 
 
