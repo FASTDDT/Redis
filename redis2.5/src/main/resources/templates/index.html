@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -9,32 +9,26 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/my.js"></script>
     <script>
-
-            $(document).ready(
-                function () {
-                    var sesionId=localStorage.getItem("sesionId");
-                    if (sesionId!=null){
-                        $.post("/login_auto",{"sessionId":sesionId},
-                        function (data) {
-                            JSON.stringify(data);
-                            alert(data);
-                        })
-                    }
+        $(document).ready(function () {
+            getJsonList();
+            
+        })
+        function getJsonList() {
+            $.post("/jsonString",function(data){
+                var obj=null;
+                JSON.stringify(data);
+                    $.each(data.data,function (i,value) {
+                      obj=JSON.parse(value);
+                      alert(obj.userNickname);
+                    });
                 }
+
             )
-
-
-    // $(document).ready(
-    //     function (){
-    //         setSessionId();
-    //     }
-    // )
-</script>
+        }
+    </script>
 </head>
 <body>
-<div>
-    <p th:text="${sessionId}" id="sessionId">Welcome to our grocery store!</p>
-</div>
+<div class="header" style="background-color: gold">vvvvvvvv</div>
 
 </body>
 </html>

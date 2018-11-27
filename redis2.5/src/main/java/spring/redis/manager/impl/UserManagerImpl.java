@@ -1,5 +1,6 @@
 package spring.redis.manager.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
@@ -15,6 +16,7 @@ import spring.redis.mapper.UserMapper;
 import spring.redis.manager.UserManager;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import springfox.documentation.spring.web.json.Json;
 
 import java.awt.*;
 import java.time.LocalDateTime;
@@ -77,6 +79,16 @@ public class UserManagerImpl extends ServiceImpl<UserMapper, User> implements Us
         System.out.println(total);
         return data;
     }
+
+    @Override
+    public String ObjToJson(User user) {
+        String json= JSON.toJSONString(user);
+        User user1=JSON.parseObject(json,User.class);
+        System.out.println(user1.getUserNickname());
+        return json;
+    }
+
+
 
     @Override
     public Boolean OptimisticLocker() {

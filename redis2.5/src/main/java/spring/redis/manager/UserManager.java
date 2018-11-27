@@ -25,9 +25,10 @@ public interface UserManager extends IService<User> {
     Wrapper<User> selectUsers();
 //    Page<User> selectUserPage(Page<User> page, Integer version);
 
+
     int count();
     List<User> helpPage();
-
+    String ObjToJson(User user);
     Boolean OptimisticLocker();
 
     List<User> selectPage();

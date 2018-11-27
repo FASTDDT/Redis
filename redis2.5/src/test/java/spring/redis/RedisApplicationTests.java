@@ -243,6 +243,11 @@ public class RedisApplicationTests {
         }
         redisManager.setHashMap("derkey",map);
     }
+    @Test
+    public void Json(){
+        List<User> list=userManager.testSelect();
+        list.forEach(user -> {userManager.ObjToJson(user);});
+    }
 }
 
 

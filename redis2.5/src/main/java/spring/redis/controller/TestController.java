@@ -1,16 +1,22 @@
 package spring.redis.controller;
 
+import com.alibaba.fastjson.JSON;
 import help.Form.RegistForm;
+import help.common.Result;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import spring.redis.manager.RedisManager;
+import spring.redis.manager.UserManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +24,8 @@ import java.util.Map;
 public class TestController {
     @Autowired
     RedisManager redisManager;
-
+    @Autowired
+    UserManager userManager;
     @RequestMapping("/regist")
     public String regist(@Valid RegistForm form, BindingResult result, HttpServletRequest request) {
 //        Map<String,Object>map=result.getModel();
@@ -58,5 +65,13 @@ public class TestController {
 //        redisManager.getHashMap("xxkey").forEach((key, value) -> System.out.println(key + "\t" + value));
         return "test";
 
+    }
+    @ResponseBody
+    @RequestMapping("/jsonString")
+    @ApiOperation(httpMethod = "post" ,value = "直接传Json")
+    Result<List<String>> Json(){
+        List<String> list=new LinkedList <>();
+        userManager.testSelect().forEach(user -> list.add(JSON.toJSONString(user)));
+        return Result.getSuccessResult(list);
     }
 }

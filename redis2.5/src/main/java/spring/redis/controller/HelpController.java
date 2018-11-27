@@ -11,16 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import spring.redis.manager.RedisManager;
+import spring.redis.manager.UserManager;
+import spring.redis.model.User;
 import spring.redis.service.RedisService;
 import spring.redis.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/")
 public class HelpController {
+    @Autowired
+    UserManager userManager;
     @Autowired
     RedisManager redisManager;
     @Autowired
@@ -34,6 +39,13 @@ public class HelpController {
         modelAndView.addObject("sessionId", s);
         redisManager.getKeys("*");
         return modelAndView;
+    }
+    @RequestMapping("/an")
+    public String forAn(HttpServletRequest request) {
+        String s=request.getSession().getId();
+        List<User> list=userManager.testSelect();
+        list.forEach(user -> {userManager.ObjToJson(user);});
+        return "test";
     }
 
     @ResponseBody
