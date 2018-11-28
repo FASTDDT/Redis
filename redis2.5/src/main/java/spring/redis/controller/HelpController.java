@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import spring.redis.manager.RedisManager;
@@ -50,7 +51,7 @@ public class HelpController {
 
     @ResponseBody
     @RequestMapping(value = "/getIp")
-    @ApiOperation(value = "获取主机IP", httpMethod = "POST", notes = "返回操作结果")
+    @ApiOperation(value = "获取主机IP", notes = "返回操作结果")
     public Result <String> getIp() {
         String string = null;
         try {
@@ -64,7 +65,7 @@ public class HelpController {
 
     @ResponseBody
     @RequestMapping(value = "/login_auto")
-    @ApiOperation(value = "自动登录", httpMethod = "POST", notes = "返回操作结果")
+    @ApiOperation(value = "自动登录", notes = "返回操作结果")
     public Result <UserVo> login_auto(LoginForm form) {
         String sessionId=form.getSessionId();
         Boolean b=redisManager.exists(sessionId);

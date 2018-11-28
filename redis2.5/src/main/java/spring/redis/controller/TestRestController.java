@@ -39,7 +39,7 @@ public class TestRestController {
 
     @ResponseBody
     @RequestMapping(value = "/sessions")
-    @ApiOperation(value = "获取本机ip", httpMethod = "POST", notes = "返回操作结果")
+    @ApiOperation(value = "获取本机ip", notes = "返回操作结果")
     public Object sessions(HttpServletRequest request) {
         Map <String, Object> map = new HashMap <>();
         String sessionId = request.getSession().getId();
@@ -57,7 +57,7 @@ public class TestRestController {
 
     @ResponseBody
     @RequestMapping(value = "/flush")
-    @ApiOperation(value = "清空redis缓存", httpMethod = "POST", notes = "返回操作结果")
+    @ApiOperation(value = "清空redis缓存", notes = "返回操作结果")
     public Result <String> flushCache() {
         redisManager.flushCache();
         return Result.getSuccessResult("redis已清空");
@@ -65,7 +65,7 @@ public class TestRestController {
 
     @ResponseBody
     @RequestMapping(value = "/getkeys")
-    @ApiOperation(value = "清空redis缓存", httpMethod = "POST", notes = "返回操作结果")
+    @ApiOperation(value = "清空redis缓存", notes = "返回操作结果")
     public Result <String> getkeys() {
         Set <String> set = redisManager.getKeys("*");
         if (set.isEmpty()) {
@@ -90,7 +90,7 @@ public class TestRestController {
     }
 
     @RequestMapping(value = "/login")
-    @ApiOperation(value = "自动登录", httpMethod = "POST", notes = "返回操作结果")
+    @ApiOperation(value = "自动登录" , notes = "返回操作结果")
     public Map <String, String> login(LoginForm form, HttpServletRequest request) {
         Map <String, String> map = new HashMap <>();
         String s = request.getSession().getId();

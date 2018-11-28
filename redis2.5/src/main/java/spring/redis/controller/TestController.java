@@ -68,7 +68,7 @@ public class TestController {
     }
     @ResponseBody
     @RequestMapping("/jsonString")
-    @ApiOperation(httpMethod = "post" ,value = "直接传Json")
+    @ApiOperation(value = "直接传Json")
     Result<List<String>> Json(){
         List<String> list=new LinkedList <>();
         userManager.testSelect().forEach(user -> list.add(JSON.toJSONString(user)));
