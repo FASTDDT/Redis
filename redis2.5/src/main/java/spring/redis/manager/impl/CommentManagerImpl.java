@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CommentManagerImpl extends ServiceImpl<CommentMapper , Comment> implements CommentManager {
-//    CommentMapper commentMapper;
+
     @Override
     public void deleteAll() {
   //      commentMapper.deleteAll();

@@ -4,10 +4,12 @@ package spring.redis.controller;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
+import spring.redis.manager.RedisManager;
 import spring.redis.model.User;
 
 import javax.servlet.http.HttpServletResponse;
@@ -25,37 +27,6 @@ import java.util.*;
 @Controller
 @RequestMapping("/file")
 public class PalaceController {
-    @RequestMapping("/upload")
-    @ResponseBody
-    public String getfile(@RequestParam("myfile") MultipartFile file){
-        System.out.println("file name = "+file.getOriginalFilename());
-
-        // 获取文件名
-        String fileName = file.getOriginalFilename();
-        // 获取后缀
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
-        // 文件上产的路径
-        String filePath = "e:/mydownload/upload/";
-        // fileName处理
-        fileName = filePath+ UUID.randomUUID()+fileName;
-        // 文件对象
-        File dest = new File(fileName);
-        // 创建路径
-        if(!dest.getParentFile().exists()){
-            dest.getParentFile().mkdir();
-        }
-
-        try {
-            //保存文件
-            file.transferTo(dest);
-            return "上传成功";
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "上传失败";
-    }
-
     @RequestMapping("/download")
     public void download(HttpServletResponse response) throws FileNotFoundException {
         File file =new File("C:\\Users\\ASUS\\Desktop\\spring-boot-reference.pdf");
