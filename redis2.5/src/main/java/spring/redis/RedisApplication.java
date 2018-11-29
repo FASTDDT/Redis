@@ -8,9 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 
-
-
-
 @ComponentScan(basePackages = {"spring.redis.*","help.*"})
 @MapperScan(basePackages = {"spring.redis.mapper"})
 @EnableScheduling
