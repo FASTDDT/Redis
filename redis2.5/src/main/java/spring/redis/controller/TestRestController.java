@@ -1,7 +1,6 @@
 package spring.redis.controller;
 
 import help.Form.LoginForm;
-import help.Form.RegistForm;
 import help.common.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,7 @@ import spring.redis.model.User;
 import spring.redis.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

@@ -20,7 +20,7 @@ import java.util.Map;
 @Data
 public class Result<T> {
 
-    @ApiModelProperty(value = "<a href='http://cf.dawanju.net/pages/viewpage.action?pageId=15271434'>错误码</a>")
+    @ApiModelProperty(value = "错误码")
     private int code = CodeEnum.SUCCESS.getCode();
 
     @ApiModelProperty(value = "错误信息")

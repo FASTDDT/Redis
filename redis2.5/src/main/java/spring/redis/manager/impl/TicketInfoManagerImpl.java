@@ -1,6 +1,7 @@
 package spring.redis.manager.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import spring.redis.model.TestUnion;
 import spring.redis.model.TicketInfo;
 import spring.redis.mapper.TicketInfoMapper;

@@ -14,11 +14,17 @@ import java.util.UUID;
 @Component
 @Slf4j
 public class FileLoad {
-    private static String basePath;
+    private static String upPath;
+
+    private static String downPath;
 
     @Value("${upload.path}")
-    public void setBasePath(String path){
-        FileLoad.basePath=path;
+    public void setUpPath(String path){
+        FileLoad.upPath=path;
+    }
+    @Value("${download.path}")
+    public void setDownPath(String path){
+        FileLoad.downPath=path;
     }
     public static void upLoadFile(MultipartFile mfile) throws IOException {
         String originalFilename=mfile.getOriginalFilename();
@@ -28,7 +34,7 @@ public class FileLoad {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy\\MM\\dd\\HH\\mm\\ss");
         LocalDateTime dateTime = LocalDateTime.now();
         String time = dateTime.format(formatter); // "1986-04-08 12:30"
-        String path=basePath+time;
+        String path=upPath+time;
 
         File file=new File(path);
         if (!file.exists()){
@@ -38,4 +44,6 @@ public class FileLoad {
         System.out.println("path:"+path);
         mfile.transferTo(new File(path));
     }
+
+
 }

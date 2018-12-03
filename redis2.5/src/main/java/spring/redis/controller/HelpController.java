@@ -8,19 +8,15 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import spring.redis.manager.RedisManager;
 import spring.redis.manager.UserManager;
 import spring.redis.model.User;
-import spring.redis.service.RedisService;
 import spring.redis.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -52,7 +48,7 @@ public class HelpController {
     @ResponseBody
     @RequestMapping(value = "/getIp")
     @ApiOperation(value = "获取主机IP", notes = "返回操作结果")
-    public Result <String> getIp() {
+    public Result<String> getIp() {
         String string = null;
         try {
             string = Internet.getLocalHostLANAddress().getHostAddress();

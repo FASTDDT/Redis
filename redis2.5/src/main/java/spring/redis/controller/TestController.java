@@ -26,7 +26,7 @@ public class TestController {
     RedisManager redisManager;
     @Autowired
     UserManager userManager;
-    @RequestMapping("/regist")
+    @RequestMapping("/register")
     public String regist(@Valid RegistForm form, BindingResult result, HttpServletRequest request) {
 //        Map<String,Object>map=result.getModel();
 //        map.forEach((k,v)-> System.out.println("regist:"+k+"\t"+v));
