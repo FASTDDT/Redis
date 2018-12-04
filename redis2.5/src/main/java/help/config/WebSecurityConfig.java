@@ -22,24 +22,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/", "index").permitAll()
+        http
+                .authorizeRequests()  //定义哪些url需要保护，哪些url不需要保护
+                .antMatchers("/him", "/message/").permitAll()    //定义不需要认证就可以访问
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/check")  //定义当需要用户登录时候，转到的登录页面
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                ;
+                .permitAll();
+        http.csrf().disable();
     }
-
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-            .withUser("user").password("password").roles("USER");
+        auth
+                .inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER");
+        //在内存中创建了一个用户，该用户的名称为user，密码为password，用户角色为USER
     }
 
 }

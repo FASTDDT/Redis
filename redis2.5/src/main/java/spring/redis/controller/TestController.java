@@ -26,6 +26,10 @@ public class TestController {
     RedisManager redisManager;
     @Autowired
     UserManager userManager;
+    @RequestMapping("/check")
+    public String checkin(){
+        return "check";
+    }
     @RequestMapping("/register")
     public String regist(@Valid RegistForm form, BindingResult result, HttpServletRequest request) {
 //        Map<String,Object>map=result.getModel();
