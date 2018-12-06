@@ -1,6 +1,5 @@
 package spring.redis.controller;
 
-import help.Form.LoginForm;
 import help.common.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,17 +84,6 @@ public class TestRestController {
         mView.addObject("departments", userService.selectTen());
         return mView;
     }
-
-//    @RequestMapping(value = "/login")
-//    @ApiOperation(value = "自动登录" , notes = "返回操作结果")
-//    public Map <String, String> login(LoginForm form, HttpServletRequest request) {
-//        Map <String, String> map = new HashMap <>();
-//        String s = request.getSession().getId();
-//
-//        userService.Login(form, s);
-//        map.put(s, form.getNickName());
-//        return map;
-//    }
 
 
 }
