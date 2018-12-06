@@ -19,17 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
 public class HelpController {
-    @Autowired
-    RedisManager redisManager;
-    @RequestMapping("/")
-    public ModelAndView index(HttpServletRequest request, ModelAndView modelAndView) {
-        String s = request.getSession().getId();
-        modelAndView.setViewName("index");
-        modelAndView.addObject("sessionId", s);
-        redisManager.getKeys("*");
-        return modelAndView;
+    @RequestMapping("/homePage")
+    public String getIndex() {
+        return "index";
     }
-
+    @RequestMapping("/login")
+    public String loginIn(){
+        return "login";
+    }
 }

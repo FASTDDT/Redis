@@ -1,6 +1,7 @@
 package help.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +11,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import spring.redis.security.CustomUserService;
 
 import java.util.Collection;
 
@@ -28,30 +31,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("*/*").permitAll();
-        //        http
-//                .authorizeRequests()  //定义哪些url需要保护，哪些url不需要保护
-//                .antMatchers("/him", "/message/").permitAll()    //定义不需要认证就可以访问
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/check")  //定义当需要用户登录时候，转到的登录页面
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll();
+    http
+            .authorizeRequests()
+            .antMatchers("/resources/*").permitAll()
+            .antMatchers("/admin/*").hasRole("ADMIN")
+            .antMatchers("/db/*").hasAnyRole("ADMIN","DBA")
+            .antMatchers("/user/*").hasAnyRole("ADMIN","DBA","USER")
+            .and()
+            .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/homePage")
+            .and()
+            .formLogin()
+            .loginPage("/login");
         http.csrf().disable();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
-        //在内存中创建了一个用户，该用户的名称为user，密码为password，用户角色为USER
+    @Bean
+    UserDetailsService customUserService(){ //注册UserDetailsService 的bean
+        return new CustomUserService();
     }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserService()); //user Details Service验证
 
+    }
 
 }

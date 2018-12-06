@@ -1,5 +1,6 @@
 package spring.redis;
 
+import help.Enum.AuthorityEnum;
 import help.util.MapAndEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -247,6 +248,12 @@ public class RedisApplicationTests {
     public void Json(){
         List<User> list=userManager.testSelect();
         list.forEach(user -> {userManager.ObjToJson(user);});
+    }
+    @Test
+    public void enumTest(){
+        for (AuthorityEnum e:AuthorityEnum.values()){
+            System.out.println(e.getCode()+"\t"+e.getDisc());
+        }
     }
 }
 

@@ -29,5 +29,9 @@ public interface UserMapper extends BaseMapper<User> {
     @ResultMap("BaseResultMap")
     List<User> getSome();
 
+    @Select("select * from user where user_nickname="+"#{username}")
+    @ResultMap("BaseResultMap")
+    User findByUserName(String username);
+
 
 }

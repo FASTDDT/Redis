@@ -86,16 +86,16 @@ public class TestRestController {
         return mView;
     }
 
-    @RequestMapping(value = "/login")
-    @ApiOperation(value = "自动登录" , notes = "返回操作结果")
-    public Map <String, String> login(LoginForm form, HttpServletRequest request) {
-        Map <String, String> map = new HashMap <>();
-        String s = request.getSession().getId();
-
-        userService.Login(form, s);
-        map.put(s, form.getNickName());
-        return map;
-    }
+//    @RequestMapping(value = "/login")
+//    @ApiOperation(value = "自动登录" , notes = "返回操作结果")
+//    public Map <String, String> login(LoginForm form, HttpServletRequest request) {
+//        Map <String, String> map = new HashMap <>();
+//        String s = request.getSession().getId();
+//
+//        userService.Login(form, s);
+//        map.put(s, form.getNickName());
+//        return map;
+//    }
 
 
 }

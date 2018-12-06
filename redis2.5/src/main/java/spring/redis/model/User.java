@@ -43,7 +43,7 @@ public class User extends Model<User> {
     /**
      * 用户昵称
      */
-    @NotNull(message = "写个昵称吧！")
+
     @TableField("user_nickname")
     private String userNickname;
     /**

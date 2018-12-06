@@ -32,9 +32,6 @@ public class TestController {
     }
     @RequestMapping("/register")
     public String regist(@Valid RegistForm form, BindingResult result, HttpServletRequest request) {
-//        Map<String,Object>map=result.getModel();
-//        map.forEach((k,v)-> System.out.println("regist:"+k+"\t"+v));
-////        request.setAttribute("hi",);
         Map <String, String> map = new HashMap <>();
         if (result.hasErrors()) {
 
@@ -59,14 +56,6 @@ public class TestController {
             map.put("" + i, "" + i);
         }
         System.out.println(redisManager.setHashMap("xxkey", map));
-//        Map <String, String> getMap = redisManager.getHashMap("xxkey");
-//        getMap.forEach((key, value) -> System.out.println(key + "\t" + value));
-//        map.clear();
-//        for (int i = 10; i < 25; i++) {
-//            map.put("" + i, "" + i);
-//        }
-//        System.out.println("==========================================");
-//        redisManager.getHashMap("xxkey").forEach((key, value) -> System.out.println(key + "\t" + value));
         return "test";
 
     }

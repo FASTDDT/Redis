@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Map;
@@ -26,6 +24,7 @@ import java.util.Map;
 public class NomalMethodController {
     /**
      * swagger-ui.html
+     * /druid/login.html
      */
     //文件上传与下载
     @RequestMapping(value = "/upload")
@@ -74,7 +73,6 @@ public class NomalMethodController {
                 }
 
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             System.out.println("----------file download" + filename);
@@ -82,7 +80,6 @@ public class NomalMethodController {
                 bis.close();
                 fis.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

@@ -3,6 +3,7 @@ package help.Task;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.JedisPubSub;
 @Slf4j
+
 public class Subscribe extends JedisPubSub {
     public void onPSubscribe(String pattern, int subscribedChannels) {
         log.info("Subscribe-onPSubscribe>>>>>>>>>>>>>>>>>>>>>>>>"+pattern + "=" + subscribedChannels);
