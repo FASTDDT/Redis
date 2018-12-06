@@ -24,7 +24,8 @@ public class CodeGenerator {
     //作者
     private static String authorName = "father";
     //要生成的表名
-    private static String[] tables = {"user","device","comment","orderx","palace","project","ticket_info"};
+    //{"user","device","comment","orderx","palace","project","ticket_info"};
+    private static String[] tables = {"role","permission","permission_role"};
     //table前缀
     private static String prefix = "";
 
@@ -45,7 +46,7 @@ public class CodeGenerator {
          * 获取项目路径
          */
         try {
-            canonicalPath = new File("").getCanonicalPath();
+            canonicalPath = new File("E:/helloL").getCanonicalPath();
         } catch (IOException e) {
             e.printStackTrace();
         }
