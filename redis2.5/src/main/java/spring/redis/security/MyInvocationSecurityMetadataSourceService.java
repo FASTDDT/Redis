@@ -1,13 +1,14 @@
 package spring.redis.security;
 
 import help.Enum.AuthorityEnum;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
-import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import spring.redis.mapper.PermissionRoleMapper;
+import spring.redis.model.PermissionRole;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * <p>
@@ -20,7 +21,8 @@ import java.util.List;
  */
 public class MyInvocationSecurityMetadataSourceService implements FilterInvocationSecurityMetadataSource {
     private HashMap<String, Collection<ConfigAttribute>> map =null;
-
+    @Autowired
+    PermissionRoleMapper mapper;
     /**
      * 加载权限表中所有权限
      */

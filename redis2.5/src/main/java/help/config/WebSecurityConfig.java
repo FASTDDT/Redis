@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import spring.redis.security.CustomUserService;
+import spring.redis.security.MyFilterSecurityInterceptor;
 
 import java.util.Collection;
 
@@ -29,6 +31,7 @@ import java.util.Collection;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private MyFilterSecurityInterceptor myFilterSecurityInterceptor;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -45,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin()
             .loginPage("/login");
+        http.addFilterBefore(myFilterSecurityInterceptor, FilterSecurityInterceptor.class);
         http.csrf().disable();
     }
 
