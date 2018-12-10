@@ -1,6 +1,6 @@
 package spring.redis.mapper;
 
-import spring.redis.model.Role;
+import spring.redis.model.SysPermission;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author father
- * @since 2018-12-06
+ * @since 2018-12-10
  */
-public interface RoleMapper extends BaseMapper<Role> {
+public interface SysPermissionMapper extends BaseMapper<SysPermission> {
 
 }

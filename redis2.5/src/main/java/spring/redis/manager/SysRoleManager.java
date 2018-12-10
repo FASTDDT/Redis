@@ -1,6 +1,6 @@
 package spring.redis.manager;
 
-import spring.redis.model.Role;
+import spring.redis.model.SysRole;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.service.IService;
  * </p>
  *
  * @author father
- * @since 2018-12-06
+ * @since 2018-12-10
  */
-public interface RoleManager extends IService<Role> {
+public interface SysRoleManager extends IService<SysRole> {
 
 }

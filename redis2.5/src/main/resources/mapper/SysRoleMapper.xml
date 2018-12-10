@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="spring.redis.mapper.RoleMapper">
+<mapper namespace="spring.redis.mapper.SysRoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="spring.redis.model.Role">
+    <resultMap id="BaseResultMap" type="spring.redis.model.SysRole">
         <id column="id" property="id" />
         <result column="name" property="name" />
-        <result column="is_deleted" property="isDeleted" />
-        <result column="gmt_create" property="gmtCreate" />
-        <result column="gmt_modify" property="gmtModify" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, is_deleted, gmt_create, gmt_modify
+        id, name
     </sql>
 
 </mapper>

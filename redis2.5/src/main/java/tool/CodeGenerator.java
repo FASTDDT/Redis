@@ -25,7 +25,7 @@ public class CodeGenerator {
     private static String authorName = "father";
     //要生成的表名
     //{"user","device","comment","orderx","palace","project","ticket_info"};
-    private static String[] tables = {"role","permission","permission_role"};
+    private static String[] tables = {"sys_permission","sys_role","sys_role_permission","sys_user_role"};
     //table前缀
     private static String prefix = "";
 

@@ -82,11 +82,11 @@ public class User extends Model<User> {
      */
     @TableField("user_money")
     private Long userMoney;
-    /**
-     * 用户类型 1学员 2教师 3管理员
-     */
-    @TableField("user_role")
-    private Integer userRole;
+//    /**
+//     * 用户类型 1学员 2教师 3管理员
+//     */
+//    @TableField("user_role")
+//    private Integer userRole;
     /**
      * 逻辑删除 0未删除 1已删除
      */

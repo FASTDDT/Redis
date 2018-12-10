@@ -1,13 +1,12 @@
 package spring.redis.mapper;
 
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.web.bind.annotation.RequestMapping;
-import spring.redis.model.TestUnion;
-import spring.redis.model.User;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import spring.redis.model.SysPermission;
+import spring.redis.model.SysRole;
+import spring.redis.model.SysRolePermission;
+import spring.redis.model.User;
 
 import java.util.List;
 
@@ -32,6 +31,34 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from user where user_nickname="+"#{username}")
     @ResultMap("BaseResultMap")
     User findByUserName(String username);
+
+
+    /**
+     * 通过username查找 user
+     * username是唯一的前提
+     *
+     * @param username
+     * @return SysUser
+     */
+    User findUserByUsername(String username);
+
+    /**
+     * 通过用户名 查找·
+     * @param username
+     * @return List<SysRole>
+     */
+    List<SysRole> findRolesByUsername(String username);
+
+    /**
+     * 通过用户名 查找权限
+     * @param username
+     * @return List<SysPermission>
+     */
+    List<SysPermission> findPermissionsByUsername(String username);
+
+    List<SysRolePermission> findAllRolePermissoin();
+
+
 
 
 }
