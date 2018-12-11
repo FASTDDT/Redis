@@ -2,11 +2,13 @@ package spring.redis.model;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotations.Version;
 
+import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -26,7 +28,8 @@ import lombok.experimental.Accessors;
 public class SysRolePermission extends Model<SysRolePermission> {
 
     private static final long serialVersionUID = 1L;
-
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
     @TableField("sys_role_id")
     private Long sysRoleId;
     @TableField("sys_permission_id")

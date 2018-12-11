@@ -40,6 +40,8 @@ public interface UserMapper extends BaseMapper<User> {
      * @param username
      * @return SysUser
      */
+    @Select("select * from user where user_nickname=#{username}")
+    @ResultMap("BaseResultMap")
     User findUserByUsername(String username);
 
     /**
