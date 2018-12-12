@@ -14,9 +14,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * <p>
- * 前端控制器
- * </p>
  *
  * @author father
  * @ClassName WebSecurityConfig
@@ -77,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "index", "/login", "/css/**", "/js/**")//允许访问
+                .antMatchers("/","/img/**", "/index", "/login", "/css/**", "/js/**")//允许访问
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -89,7 +86,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
     }
+
 }
-
-
-

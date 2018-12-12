@@ -18,4 +18,9 @@ public class HelpController {
     public String admin(){
         return "test";
     }
+
+    @RequestMapping("/")
+    public String toString() {
+        return "index";
+    }
 }

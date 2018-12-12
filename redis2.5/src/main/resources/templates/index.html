@@ -8,24 +8,6 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/my.js"></script>
-    <script>
-        $(document).ready(function () {
-            // getJsonList();
-
-        })
-        function getJsonList() {
-            $.post("/jsonString",function(data){
-                var obj=null;
-                JSON.stringify(data);
-                    $.each(data.data,function (i,value) {
-                      obj=JSON.parse(value);
-                      alert(obj.userNickname);
-                    });
-                }
-
-            )
-        }
-    </script>
 </head>
 <body>
 <div class="header" style="background-color: gold">vvvvvvvv</div>
