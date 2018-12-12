@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 @Service
-class RedisManagerImpl implements RedisManager, CommandLineRunner {
+class RedisManagerImpl implements RedisManager {
 
     private static Logger logger = LoggerFactory.getLogger(RedisManagerImpl.class);
 
@@ -160,19 +160,7 @@ class RedisManagerImpl implements RedisManager, CommandLineRunner {
         returnResource(jedis);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        Jedis jedis = getResource();
-        try {
-            //监听所有reids通道中的过期事件
-            jedis.psubscribe(new Subscribe(), "*");
-        } catch (Exception e) {
-            jedis.close();
-            e.printStackTrace();
-        } finally {
-            jedis.close();
-        }
-    }
+
 
 
 //    @Override

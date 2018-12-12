@@ -14,7 +14,7 @@
         <result column="user_phone" property="userPhone"/>
         <result column="user_point" property="userPoint"/>
         <result column="user_money" property="userMoney"/>
-        <result column="user_role" property="userRole"/>
+        <!--<result column="user_role" property="userRole"/>-->
         <result column="is_deleted" property="isDeleted"/>
         <result column="gmt_create" property="gmtCreate"/>
         <result column="gmt_modify" property="gmtModify"/>
@@ -24,16 +24,17 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        version, user_id, user_nickname, user_realname, user_account, user_password, user_sex, user_phone, user_point, user_money, user_role, is_deleted, gmt_create, gmt_modify, login_status, last_login_time
-    </sql>
+--         version, user_id, user_nickname, user_realname, user_account, user_password, user_sex, user_phonene, user_point, user_money, user_role, is_deleted, gmt_create, gmt_modify, login_status, last_login_time
+ version, user_id, user_nickname, user_realname, user_account, user_password, user_sex, user_phone, user_point, user_money, is_deleted, gmt_create, gmt_modify, login_status, last_login_time
+</sql>
 
     <select id="findPermissionsByUsername" resultType="spring.redis.model.SysPermission">
         select sp.*
         from user su
-        left join sys_user_role  sur on su.id = sur.sys_user_id
+        left join sys_user_role  sur on su.user_id = sur.sys_user_id
         left join sys_role_permission srp on sur.sys_role_id = srp.sys_role_id
         left join sys_permission sp on srp.sys_permission_id = sp.id
-        where su.username = #{username}
+        where su.user_nickname = #{username}
     </select>
 
     <select id="findRolesByUsername" resultType="spring.redis.model.SysRole">

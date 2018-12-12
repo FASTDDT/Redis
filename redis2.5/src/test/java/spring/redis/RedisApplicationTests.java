@@ -1,5 +1,6 @@
 package spring.redis;
 
+import com.alibaba.fastjson.JSON;
 import help.Enum.AuthorityEnum;
 import help.util.MapAndEntity;
 import org.junit.Test;
@@ -13,8 +14,8 @@ import spring.redis.manager.CommentManager;
 import spring.redis.manager.RedisManager;
 import spring.redis.manager.TicketInfoManager;
 import spring.redis.manager.UserManager;
-import spring.redis.model.TestUnion;
-import spring.redis.model.User;
+import spring.redis.mapper.UserMapper;
+import spring.redis.model.*;
 import spring.redis.service.UserService;
 import help.util.Internet;
 import java.net.InetAddress;
@@ -27,6 +28,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RedisApplicationTests {
+    @Autowired
+    UserMapper mapper;
     @Autowired
     RedisManager redisManager;
 
@@ -254,6 +257,23 @@ public class RedisApplicationTests {
         for (AuthorityEnum e:AuthorityEnum.values()){
             System.out.println(e.getCode()+"\t"+e.getDisc());
         }
+    }
+    @Test
+    public void testUserMapper(){
+        System.out.println("========testUserMapper========");
+        System.out.println("==============findAllRolePermissoin=================");
+       for (SysRolePermission rp: mapper.findAllRolePermissoin())
+           System.out.println(JSON.toJSONString(rp));
+        System.out.println("==========findPermissionsByUsername==============");
+       List<SysPermission> permissions=mapper.findPermissionsByUsername("2014122879");
+       if (!permissions.isEmpty())
+           for (SysPermission permission:permissions)
+               System.out.println(JSON.toJSONString(permission));
+       else
+           System.out.println("findPermissionsByUsername is empty");
+        System.out.println("====================findUserByUsername======================");
+       User user=mapper.findUserByUsername("2014122879");
+        System.out.println(JSON.toJSONString(user));
     }
 }
 

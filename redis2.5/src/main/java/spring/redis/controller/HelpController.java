@@ -14,4 +14,8 @@ public class HelpController {
     public String loginIn(){
         return "login";
     }
+    @RequestMapping("/admin")
+    public String admin(){
+        return "test";
+    }
 }
