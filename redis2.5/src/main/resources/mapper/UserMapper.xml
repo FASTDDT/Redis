@@ -40,7 +40,7 @@
     <select id="findRolesByUsername" resultType="spring.redis.model.SysRole">
         select sr.*
         from user su
-        left join sys_user_role  sur on su.id = sur.sys_user_id
+        left join sys_user_role  sur on su.user_id = sur.sys_user_id
         left join sys_role sr on sur.sys_role_id = sr.id
         where su.user_nickname = #{username}
     </select>

@@ -1,5 +1,6 @@
 package spring.redis.security;
 
+import org.springframework.stereotype.Component;
 import spring.redis.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -7,12 +8,10 @@ import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.stereotype.Component;
 import spring.redis.model.SysRolePermission;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-
 
 @Component
 public class MyInvocationSecurityMetadataSourceService  implements

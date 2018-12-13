@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 @RestController
+@RequestMapping("/gggg")
 public class TestRestController {
     @Autowired
     RedisManager redisManager;

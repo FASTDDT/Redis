@@ -20,10 +20,11 @@ import java.util.Iterator;
  * @author father
  * @ClassName MyAccessDecisionManager
  * @since 2018/12/10 19:15
- */
+// */
 @Slf4j
 @Component
 public class MyAccessDecisionManager implements AccessDecisionManager {
+
 
     /**
      * 判定 是否含有权限

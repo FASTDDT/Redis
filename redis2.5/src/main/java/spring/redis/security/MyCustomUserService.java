@@ -1,9 +1,7 @@
 package spring.redis.security;
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import spring.redis.mapper.UserMapper;
-import spring.redis.model.SysPermission;
 import spring.redis.model.SysRole;
 import spring.redis.model.User;
 
@@ -35,6 +32,7 @@ public class MyCustomUserService implements UserDetailsService {
 
 
 
+
     @Autowired
     private UserMapper sysUserMapper;
 
@@ -50,21 +48,20 @@ public class MyCustomUserService implements UserDetailsService {
         log.info("根据名称获取用户信息： username is {}",username);
 
         User user = sysUserMapper.findUserByUsername(username);
-        log.info("First===============================================测试的JSON:"+JSON.toJSONString(user));
         if(user == null)
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
-        log.info("Second===============================================测试的JSON:"+JSON.toJSONString(user));
+
         //获取所有请求的url
         //List<SysPermission> sysPermissions = sysUserMapper.findPermissionsByUsername(user.getUsername());
-        List<SysPermission> sysRoles = sysUserMapper.findPermissionsByUsername(username);
+        List<SysRole> sysRoles = sysUserMapper.findRolesByUsername(user.getUserNickname());
 
         log.info("用户角色个数为{}",sysRoles.size());
         log.info("--------------all Roles--------------");
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (SysPermission permission: sysRoles) {
+        for (SysRole sysRole : sysRoles) {
             //封装用户信息和角色信息 到 SecurityContextHolder全局缓存中
-            log.info("name--->{}",permission.getName());
-            grantedAuthorities.add(new SimpleGrantedAuthority(permission.getName()));
+            log.info("name--->{}",sysRole.getName());
+            grantedAuthorities.add(new SimpleGrantedAuthority(sysRole.getName()));
         }
         log.info("--------------all Roles--------------");
         return new org.springframework.security.core.userdetails.User(user.getUserNickname(), user.getUserPassword(), grantedAuthorities);
