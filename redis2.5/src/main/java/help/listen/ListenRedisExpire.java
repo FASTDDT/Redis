@@ -3,6 +3,7 @@ package help.listen;
 import help.Task.Subscribe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import spring.redis.manager.RedisManager;
 
@@ -15,6 +16,7 @@ import spring.redis.manager.RedisManager;
  * @ClassName ListenRedisExpire
  * @since 2018/12/12 19:45
  */
+@Service
 public class ListenRedisExpire implements CommandLineRunner {
     @Autowired
     RedisManager redisManager;
