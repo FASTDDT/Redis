@@ -8,8 +8,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import spring.redis.security.MyCustomUserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
@@ -84,7 +86,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                .and()
+                .csrf().requireCsrfProtectionMatcher(new RequestMatcher() {
+            @Override
+            public boolean matches(HttpServletRequest httpServletRequest) {
+                String servletPath = httpServletRequest.getServletPath();
+                if (servletPath.contains("/druid")) {
+                    return false;
+                }
+                return true;
+            }
+        });
     }
 
 }
