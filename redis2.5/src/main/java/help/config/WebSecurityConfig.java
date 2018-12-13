@@ -86,18 +86,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                .and()
-                .csrf().requireCsrfProtectionMatcher(new RequestMatcher() {
-            @Override
-            public boolean matches(HttpServletRequest httpServletRequest) {
-                String servletPath = httpServletRequest.getServletPath();
-                if (servletPath.contains("/druid")) {
-                    return false;
-                }
-                return true;
-            }
-        });
+                .permitAll();
+//
+//                http.csrf().requireCsrfProtectionMatcher(new RequestMatcher() {
+//            @Override
+//            public boolean matches(HttpServletRequest httpServletRequest) {
+//                String servletPath = httpServletRequest.getServletPath();
+//                if (servletPath.contains("/druid")) {
+//                    return false;
+//                }
+//                return true;
+//            }
+//        });
+http.csrf().disable();
     }
 
 }
