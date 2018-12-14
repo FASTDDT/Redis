@@ -1,6 +1,8 @@
 package help.Aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.sun.deploy.net.HttpResponse;
+import help.util.CheckUser;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -8,11 +10,15 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -28,6 +34,8 @@ import java.util.Arrays;
 @Aspect
 @Component
 public class InfoAop {
+    @Autowired
+    HttpServletResponse response;
     //定义日志记录器--获取sl4j包下提供的logger
 //    ThreadLocal<Long> startTime = new ThreadLocal<>();  //线程副本类去记录各个线程的开始时间
 
@@ -46,7 +54,7 @@ public class InfoAop {
     }
 
     @Before("weblog()")
-    public void dobefore(JoinPoint joinPoint) {        //方法里面注入连接点
+    public void dobefore(JoinPoint joinPoint) throws IOException {        //方法里面注入连接点
         log.info("前置通知：");                     //info ,debug ,warn ,erro四种级别，这里我们注入info级别
 //        startTime.set(System.currentTimeMillis());
 
@@ -61,6 +69,18 @@ public class InfoAop {
 //        String s= JSON.toJSONString(joinPoint.getSignature());
 //        System.out.println("JSON--->"+s);
         String[] argNames = ((MethodSignature)joinPoint.getSignature()).getParameterNames();
+        int i=-1;
+        for (String arg:argNames) {
+            i++;
+            if (arg.equals("username")){
+                Object[] o=joinPoint.getArgs();
+                System.out.println("哈哈哈"+o[i]);
+                boolean b=CheckUser.checkOwn((String) o[i]);
+                if (!b){
+                    response.sendRedirect("/error");
+                }
+            }
+        }
         log.info("顶顶顶："+Arrays.toString(argNames));
         log.info("啦啦啦:" + Arrays.toString(joinPoint.getArgs()));     // 方法本传了哪些参数
     }

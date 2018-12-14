@@ -1,4 +1,4 @@
-package spring.redis.controller;
+package help.util;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -8,17 +8,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * </p>
  *
  * @author father
- * @ClassName BaseController
- * @since 2018/12/14 19:59
+ * @ClassName CheckUser
+ * @since 2018/12/14 20:45
  */
-
-public class BaseController {
-    public String getUserId(){
+public class CheckUser {
+    public static String getUserId(){
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println(username);
+        System.out.println("CheckUser"+username);
         return username;
     }
-    public boolean checkOwn(String username){
+    public static boolean checkOwn(String username){
         return getUserId().equals(username);
     }
 }

@@ -1,19 +1,12 @@
 package spring.redis.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import spring.redis.model.User;
-import spring.redis.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,18 +19,13 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController extends BaseController{
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ModelAndView getSubwayByID(ModelAndView mv,@PathVariable String id) {
+public class UserController {
+    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    public ModelAndView getSubwayByID(ModelAndView mv, @PathVariable String username) {
         mv.setViewName("model");
-        Map<String,String> map=new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         mv.addAllObjects(map);
-        boolean b=checkOwn(id);
-        if (b){
-            map.put("username",id);
-        }else {
-            map.put("username","啦啦啦啦！");
-        }
+        map.put("username", username);
         mv.addAllObjects(map);
 
         return mv;
