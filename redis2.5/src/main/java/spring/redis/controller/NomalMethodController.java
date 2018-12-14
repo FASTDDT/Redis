@@ -1,9 +1,16 @@
 package spring.redis.controller;
 
+import help.Enum.CodeEnum;
+import help.common.Result;
 import help.util.FileLoad;
+import help.util.Internet;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,6 +91,20 @@ public class NomalMethodController {
             }
         }
         return null;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/getIp")
+    @ApiOperation(value = "ip",httpMethod = "POST")
+    public Result<String> getIp() {
+        String ip= null;
+        try {
+            ip = Internet.getLocalHostLANAddress().getHostAddress();
+            System.out.println(ip);
+            return Result.getSuccessResult(ip);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.getFailResult(CodeEnum.FAILURE);
     }
 
 }

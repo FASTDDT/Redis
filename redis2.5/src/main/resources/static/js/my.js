@@ -1,7 +1,7 @@
 function getIp() {
     $.ajax({
         type: "POST",
-        url: "/getIp",
+        url: "/Nomal/getIp",
         success: function(data){
             JSON.stringify(data);
             return data.data;
@@ -9,7 +9,7 @@ function getIp() {
     });
 }
 function get_2v_src(ip,port) {
-    return 'http://2v.dedecms.com/index.php/welcome/generate_qrcode?message='+ip+':'+port+'&size=10&line_cl=rgb%28255%2C255%2C255%29&bg_cl=rgb%280%2C0%2C0%29';
+    return 'http://2v.dedecms.com/index.php/welcome/generate_qrcode?message=http://'+ip+':'+port+'&size=10&line_cl=rgb%28255%2C255%2C255%29&bg_cl=rgb%280%2C0%2C0%29';
 }
 function getkeys() {
     $.ajax({
@@ -39,7 +39,8 @@ function flush() {
     });
 }
 function show2v(){
-    $.get("/getIp",function(data){
+    $.post("/Nomal/getIp",function(data){
+        alert(data);
         var ip=data.data;
         var src=get_2v_src(ip,8888);
         var img='<img src="'+src+'">';
