@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 import org.springframework.stereotype.Component;
 import spring.redis.mapper.UserMapper;
 import spring.redis.model.SysRole;
@@ -30,9 +32,8 @@ import java.util.List;
 @Order(1)
 public class MyCustomUserService implements UserDetailsService {
 
-
-
-
+    @Autowired
+    private SessionRegistry sessionRegistry;
     @Autowired
     private UserMapper sysUserMapper;
 
@@ -50,6 +51,13 @@ public class MyCustomUserService implements UserDetailsService {
         User user = sysUserMapper.findUserByUsername(username);
         if(user == null)
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
+
+        List<Object> o = sessionRegistry.getAllPrincipals();
+        for ( Object principal : o) {
+            if (principal instanceof User && (user.getUserNickname().equals(((User) principal).getUserNickname()))) {
+                throw new SessionAuthenticationException("当前用户已经在线，登录失败！！！");
+            }
+        }
 
         //获取所有请求的url
         //List<SysPermission> sysPermissions = sysUserMapper.findPermissionsByUsername(user.getUsername());
