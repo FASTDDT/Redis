@@ -1,13 +1,14 @@
 package spring.redis.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
 @Slf4j
-public class HelpController {
+public class HelpController extends BaseController{
     @RequestMapping("/homePage")
     public String getIndex() {
       log.info("访问/homePage");
@@ -31,6 +32,8 @@ public class HelpController {
     }
     @RequestMapping("/hello")
     public String heloo(){
+        System.out.println(getUserId());
         return "login_success";
     }
+
 }

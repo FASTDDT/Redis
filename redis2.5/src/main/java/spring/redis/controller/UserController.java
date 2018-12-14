@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * <p>
- * 用户信息表 前端控制器
+ * restful security测试
  * </p>
  *
  * @author father
@@ -26,13 +26,20 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView getSubwayByID(ModelAndView mv,@PathVariable String id) {
         mv.setViewName("model");
         Map<String,String> map=new HashMap<>();
-        map.put("username",id);
         mv.addAllObjects(map);
+        boolean b=checkOwn(id);
+        if (b){
+            map.put("username",id);
+        }else {
+            map.put("username","啦啦啦啦！");
+        }
+        mv.addAllObjects(map);
+
         return mv;
     }
 }
