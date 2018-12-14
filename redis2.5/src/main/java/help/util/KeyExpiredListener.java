@@ -1,7 +1,8 @@
 package help.util;
 
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.JedisPubSub;
-
+//@Service
 public class KeyExpiredListener extends JedisPubSub {
     @Override
     public void onPSubscribe(String pattern, int subscribedChannels) {

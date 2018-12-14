@@ -10,7 +10,7 @@ public class Subscribe extends JedisPubSub {
     // 取得按表达式的方式订阅的消息后的处理
     public void onPMessage(String pattern, String channel, String message) {
         try {
-            log.info(pattern + "=" + channel + "=" + message);
+//            log.info(pattern + "=" + channel + "=" + message);
             //在这里写你相关的逻辑代码
         }catch (Exception e){
             e.printStackTrace();

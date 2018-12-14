@@ -1,5 +1,6 @@
 package spring.redis.security;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Component;
 import spring.redis.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class MyInvocationSecurityMetadataSourceService  implements
     @Autowired
     private UserMapper sysUserMapper;
 
-    /**
+     /**
      * 每一个资源所需要的角色
      */
     private static HashMap<String, Collection<ConfigAttribute>> map =null;
@@ -36,6 +37,7 @@ public class MyInvocationSecurityMetadataSourceService  implements
             String url = rolePermisson.getUrl();
             String roleName = rolePermisson.getRolename();
             ConfigAttribute role = new SecurityConfig(roleName);
+//            System.out.println("===url:"+url);
             if(map.containsKey(url)){
                 map.get(url).add(role);
             }else{
@@ -57,6 +59,7 @@ public class MyInvocationSecurityMetadataSourceService  implements
             loadResourceDefine();
         //object 中包含用户请求的request 信息
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
+
         for(Iterator<String> iter = map.keySet().iterator(); iter.hasNext(); ) {
             String url = iter.next();
             if(new AntPathRequestMatcher(url).matches(request)) {

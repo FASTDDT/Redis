@@ -29,4 +29,8 @@ public class HelpController {
         log.info("访问/");
         return "index";
     }
+    @RequestMapping("/hello")
+    public String heloo(){
+        return "login_success";
+    }
 }
