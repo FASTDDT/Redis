@@ -19,11 +19,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.util.Arrays;
 
 /**
  * <p>
- * Discription
+ *      aop
  * </p>
  *
  * @author father
@@ -31,8 +32,8 @@ import java.util.Arrays;
  * @since 2018/12/14 15:04
  */
 @Slf4j
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class InfoAop {
     @Autowired
     HttpServletResponse response;
@@ -81,8 +82,8 @@ public class InfoAop {
                 }
             }
         }
-        log.info("顶顶顶："+Arrays.toString(argNames));
-        log.info("啦啦啦:" + Arrays.toString(joinPoint.getArgs()));     // 方法本传了哪些参数
+                throw new AccessDeniedException("权限不足！");
+
     }
 
 
