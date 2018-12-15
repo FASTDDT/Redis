@@ -27,8 +27,8 @@ import java.util.Arrays;
  * @ClassName AnnotationAspect
  * @since 2018/12/15 9:22
  */
-@Component
-@Aspect//将当前类标注成一个切面。
+//@Component
+//@Aspect//将当前类标注成一个切面。
 @Slf4j
 public class AnnotationAspect {
     @Autowired
