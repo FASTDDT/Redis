@@ -1,14 +1,18 @@
 package spring.redis.controller;
 
+import help.Enum.CodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -23,21 +27,26 @@ import java.util.Map;
 @Slf4j
 @ControllerAdvice
 public class AdviceController {
-    @ExceptionHandler
-//    @ResponseBody
-    public ModelAndView getExceptions(Exception e){
-        ModelAndView mv=new ModelAndView();
-        Map<String,Integer>map=new HashMap<>();
-        if (e instanceof AccessDeniedException) {
-            AccessDeniedException le= (AccessDeniedException) e;
-            map.put("code",1);
-        }else {
-            e.printStackTrace();
-        }
-        mv.setViewName("error");
-        mv.addAllObjects(map);
-
-        return mv;
+    private static final String viewname="0error";
+    @ExceptionHandler(AccessDeniedException.class)
+    public ModelAndView catchAccessDeniedException(AccessDeniedException e){
+        return setMv(CodeEnum.NO_AUTHORITY,"map",viewname,e.getMessage());
+    }
+//   @ExceptionHandler(BadCredentialsException.class)
+//    public ModelAndView cachException(BadCredentialsException e){
+//        return setMv(CodeEnum.NO_USER,"map","error",e.getMessage());
+//    }
+    public ModelAndView setMv(CodeEnum codeEnum,String modelName,String viewName){
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",codeEnum.getCode());
+        map.put("disc",codeEnum.getDisc());
+        return new ModelAndView(viewName,modelName,map);
+    }
+    public ModelAndView setMv(CodeEnum codeEnum,String modelName,String viewName,String msg){
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",codeEnum.getCode());
+        map.put("disc",codeEnum.getDisc());
+        map.put("msg",msg);
+        return new ModelAndView(viewName,modelName,map);
     }
 }
-

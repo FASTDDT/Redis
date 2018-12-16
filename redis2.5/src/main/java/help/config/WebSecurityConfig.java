@@ -60,31 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 return encodedPassword.equals(String.valueOf(rawPassword));
             }
         });
-        //校验用户
-//        auth.userDetailsService(myCustomUserService)
-//                //校验密码
-//                .passwordEncoder(new PasswordEncoder()
-//                {
-//
-//                    @Override
-//                    public String encode(CharSequence rawPassword) {
-//                        try {
-//                            return MD5.finalMD5(String.valueOf(rawPassword));
-//                        } catch (UnsupportedEncodingException e) {
-//                            e.printStackTrace();
-//                        } catch (NoSuchAlgorithmException e) {
-//                            e.printStackTrace();
-//                        }
-//                        return null;
-//                    }
-//
-//                    @Override
-//                    public boolean matches(CharSequence rawPassword, String encodedPassword) {
-//                        //return encodedPassword.equals(Md5Util.MD5(String.valueOf(rawPassword)));
-//                        return encodedPassword.equals(String.valueOf(rawPassword));
-//                    }
-//                });
-
     }
 
 
@@ -113,20 +88,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement()
                 .maximumSessions(1)
-                .expiredUrl("/login");
-              //  .sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true).sessionRegistry(sessionRegistry);
-//
-//                http.csrf().requireCsrfProtectionMatcher(new RequestMatcher() {
-//            @Override
-//            public boolean matches(HttpServletRequest httpServletRequest) {
-//                String servletPath = httpServletRequest.getServletPath();
-//                if (servletPath.contains("/druid")) {
-//                    return false;
-//                }
-//                return true;
-//            }
-//        });
-        http.csrf().disable();
+                .expiredUrl("/login")
+                .and();
+                http.csrf().disable();
     }
     @Bean
     public SessionRegistry getSessionRegistry(){

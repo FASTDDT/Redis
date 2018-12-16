@@ -14,7 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class CheckUser {
     public static String getUserId(){
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println("CheckUser"+username);
         return username;
     }
     public static boolean checkOwn(String username){

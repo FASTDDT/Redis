@@ -3,6 +3,7 @@ package spring.redis.security;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.session.SessionRegistry;
@@ -49,9 +50,9 @@ public class MyCustomUserService implements UserDetailsService {
         log.info("根据名称获取用户信息： username is {}",username);
 
         User user = sysUserMapper.findUserByUsername(username);
-        if(user == null)
-            throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
-
+        if(user==null){
+            throw new BadCredentialsException("No user found with username ："+ username);
+        }
         List<Object> o = sessionRegistry.getAllPrincipals();
         for ( Object principal : o) {
             if (principal instanceof User && (user.getUserNickname().equals(((User) principal).getUserNickname()))) {
@@ -60,7 +61,6 @@ public class MyCustomUserService implements UserDetailsService {
         }
 
         //获取所有请求的url
-        //List<SysPermission> sysPermissions = sysUserMapper.findPermissionsByUsername(user.getUsername());
         List<SysRole> sysRoles = sysUserMapper.findRolesByUsername(user.getUserNickname());
 
         log.info("用户角色个数为{}",sysRoles.size());
