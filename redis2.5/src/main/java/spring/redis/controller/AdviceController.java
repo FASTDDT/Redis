@@ -27,10 +27,10 @@ public class AdviceController {
 //    @ResponseBody
     public ModelAndView getExceptions(Exception e){
         ModelAndView mv=new ModelAndView();
-        Map<String,String>map=new HashMap<>();
+        Map<String,Integer>map=new HashMap<>();
         if (e instanceof AccessDeniedException) {
             AccessDeniedException le= (AccessDeniedException) e;
-            map.put("msg",le.getMessage());
+            map.put("code",1);
         }else {
             e.printStackTrace();
         }
