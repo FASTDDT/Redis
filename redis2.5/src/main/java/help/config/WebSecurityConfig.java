@@ -111,7 +111,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .and()
-                .sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true).sessionRegistry(sessionRegistry);
+                .sessionManagement()
+                .maximumSessions(1)
+                .expiredUrl("/login");
+              //  .sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true).sessionRegistry(sessionRegistry);
 //
 //                http.csrf().requireCsrfProtectionMatcher(new RequestMatcher() {
 //            @Override

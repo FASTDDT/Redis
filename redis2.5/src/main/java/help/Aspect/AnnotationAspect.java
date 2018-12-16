@@ -3,11 +3,11 @@ package help.Aspect;
 import help.util.CheckUser;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -15,8 +15,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.file.AccessDeniedException;
-import java.util.Arrays;
 
 /**
  * <p>
@@ -27,8 +25,8 @@ import java.util.Arrays;
  * @ClassName AnnotationAspect
  * @since 2018/12/15 9:22
  */
-//@Component
-//@Aspect//将当前类标注成一个切面。
+@Component
+@Aspect
 @Slf4j
 public class AnnotationAspect {
     @Autowired
@@ -47,7 +45,7 @@ public class AnnotationAspect {
                     //获取servlet请求对象---因为这不是控制器，这里不能注入HttpServletRequest，但springMVC本身提供ServletRequestAttributes可以拿到
                     ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
                     HttpServletRequest request = attributes.getRequest();
-                    throw new AccessDeniedException(username, request.getRequestURL().toString(), "权限不足！");
+                    throw new AccessDeniedException(username+"--->"+request.getRequestURL().toString()+"权限不足！");
 
                 }
             }

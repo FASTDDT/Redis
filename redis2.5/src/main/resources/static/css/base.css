@@ -1,0 +1,9 @@
+*{
+    padding: 0px;
+    margin: 0px auto;
+}
+.container{
+    width: 100%;
+    background-repeat: no-repeat;
+    margin: 0% 30%;
+}

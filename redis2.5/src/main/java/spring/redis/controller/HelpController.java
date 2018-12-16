@@ -13,6 +13,11 @@ public class HelpController {
       log.info("访问/homePage");
         return "index";
     }
+    @RequestMapping("/myfault")
+    public String fault() {
+        log.info("访问/homePage");
+        return "fault";
+    }
     @RequestMapping("/login")
     public String loginIn(){
         log.info("访问/login");
