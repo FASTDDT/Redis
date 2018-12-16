@@ -1,5 +1,6 @@
 package help.config;
 
+import help.Enum.Time;
 import help.util.MD5;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import spring.redis.security.MyCustomUserService;
 
+import javax.sql.DataSource;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
@@ -27,6 +31,8 @@ import java.security.NoSuchAlgorithmException;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    DataSource dataSource;
     /**
      * 通过 实现UserDetailService 来进行验证
      */
@@ -90,8 +96,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(1)
                 .expiredUrl("/login")
                 .and();
+                http.rememberMe()
+                        .tokenRepository(persistentTokenRepository())
+                        // 有效时间：单位s
+                        .tokenValiditySeconds(Time.WEEK.getCode());
                 http.csrf().disable();
     }
+
     @Bean
     public SessionRegistry getSessionRegistry(){
         SessionRegistry sessionRegistry=new SessionRegistryImpl();
@@ -101,6 +112,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public ServletListenerRegistrationBean httpSessionEventPublisher() {
         return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
+    }
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository(){
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        // 如果token表不存在，使用下面语句可以初始化该表；若存在，会报错。
+//        tokenRepository.setCreateTableOnStartup(true);
+        return tokenRepository;
     }
 
 }
