@@ -8,7 +8,13 @@
     <link href="/css/base.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div th:if="${code}==1">有错误</div>
-
+<th th:each="a:${map}" th:text="${a.key}"></th>
+<th th:each="a:${map}" th:text="${a.value}"></th>
+<table>
+    <tr th:each="a:${map}">
+    <td th:text="${a.key}"></td>
+    <td th:text="${a.value}"></td>
+    </tr>
+</table>
 </body>
 </html>
