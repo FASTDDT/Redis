@@ -1,23 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <title>登录</title>
-    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
-    <style type="text/css">
-        body {
-            padding-top: 50px;
-        }
-
-        .starter-template {
-            padding: 40px 15px;
-            text-align: center;
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/bootstrap-3.3.6-dist/js/jquery-1.11.2.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+    <style>
+        body
+        {
+            padding-top: 70px;
         }
     </style>
 </head>
 <body>
-model
-<p th:text="${username}" th:value="${username}"></p>
-<span th:text="${username}">25 September 2018</span>
+//添加navbar-fixed-top可以让导航条一直固定在顶部，不会因为滚动条改变而改变，navbar-inverse让导航条黑底展示
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    　　<div class="container">　　//container让导航条居中container-fluid让导航条自适应
+
+    　　
+    　　　　<div class="navbar-header">
+        　　　　　　//粉色字体代表响应式布局：当浏览器宽度小于某个值时导航栏折叠变成三道杠
+        <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" type="button">
+            <span class="sr-only">看看这是什么</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+
+        </button>
+        //绿色代表导航栏左侧logo或者图标
+        　　　　 　　<a class="navbar-brand" href="www.baidu.com">浏览器博物馆</a>
+    </div>
+    　　　　//棕色包裹项目是导航条内容，为了响应式布局，点击三道杠弹出导航栏
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        　　　　　　　　//紫色代表导航栏中的项目
+        　　　　　　 <ul class="nav navbar-nav">
+        <li><a href="www.baidu.com">综述</a></li>
+        <li>//蓝色为下拉菜单
+            <a class="dropdown-toggle" data-toggle="dropdown" href="www.baidu.com">简述<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">谷歌浏览器</a></li>
+                <li><a href="#">IE浏览器</a></li>
+                <li><a href="#">360浏览器</a></li>
+                <li><a href="#">谷歌火狐浏览器</a></li>
+
+            </ul>
+            　　　　　　　　　　</li>
+        <li><a href="www.baidu.com">特点</a></li>
+        <li><a href="www.baidu.com">关于</a></li>
+
+    </ul>
+    </div>
+</div>
+</nav>
+<p>dsaf3ewqrfdsaf </p>
+<p>dsafdhtetf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+<p>dsafdsaf saf </p>
+
 </body>
 </html>

@@ -3,6 +3,9 @@ package spring.redis.mapper;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import spring.redis.model.SysPermission;
 import spring.redis.model.SysRole;
 import spring.redis.model.SysRolePermission;
@@ -59,6 +62,8 @@ public interface UserMapper extends BaseMapper<User> {
     List<SysPermission> findPermissionsByUsername(String username);
 
     List<SysRolePermission> findAllRolePermissoin();
+
+
 
 
 

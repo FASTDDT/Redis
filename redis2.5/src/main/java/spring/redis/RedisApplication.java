@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @ComponentScan(basePackages = {"spring.redis.*","help.*"})
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableScheduling
 @EnableWebSecurity
 @ServletComponentScan
+@EnableTransactionManagement
 @SpringBootApplication
 public class RedisApplication {
 

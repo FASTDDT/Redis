@@ -1,31 +1,34 @@
 package spring.redis.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import spring.redis.manager.UserManager;
 
 @Controller
 @Slf4j
 public class HelpController {
+    @Autowired
+    UserManager userManager;
+
     @RequestMapping("/homePage")
     public String getIndex() {
-      log.info("访问/homePage");
         return "index";
     }
+
     @RequestMapping("/myfault")
     public String fault() {
-        log.info("访问/homePage");
         return "fault";
     }
+
     @RequestMapping("/login")
-    public String loginIn(){
-        log.info("访问/login");
+    public String loginIn() {
         return "login";
     }
+
     @RequestMapping("/admin")
-    public String admin(){
-        log.info("访问/admin");
+    public String admin() {
         return "test";
     }
 
@@ -34,9 +37,9 @@ public class HelpController {
         log.info("访问/");
         return "index";
     }
+
     @RequestMapping("/hello")
-    public String heloo(){
-//        System.out.println(getUserId());
+    public String heloo() {
         return "login_success";
     }
 

@@ -33,8 +33,8 @@ import javax.validation.constraints.Pattern;
 public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
-    @Version
-    private Integer version;
+//    @Version
+//    private Integer version;
     /**
      * 用户编号
      */

@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import help.Form.LoginForm;
 import help.Vo.UserVo;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import spring.redis.mapper.UserMapper;
 import spring.redis.model.TestUnion;
 import spring.redis.model.User;
@@ -45,4 +48,8 @@ public interface UserManager extends IService<User> {
     List<User> testSelect();
 
     List<User> testSelectSome();
+
+    //事务
+
+    public boolean addUser(User user);
 }

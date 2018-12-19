@@ -40,7 +40,6 @@ function flush() {
 }
 function show2v(){
     $.post("/Nomal/getIp",function(data){
-        alert(data);
         var ip=data.data;
         var src=get_2v_src(ip,8888);
         var img='<img src="'+src+'">';

@@ -220,7 +220,7 @@ public class RedisApplicationTests {
     public void testUserMapperSelectSome(){
         List<User>users=userManager.testSelectSome();
         AtomicInteger i= new AtomicInteger();
-        users.forEach(user -> System.out.println(i.getAndIncrement() +"\t"+user.getUserId()+"\t"+user.getVersion()));
+//        users.forEach(user -> System.out.println(i.getAndIncrement() +"\t"+user.getUserId()+"\t"+user.getVersion()));
     }
 
     @Test
@@ -274,6 +274,13 @@ public class RedisApplicationTests {
         System.out.println("====================findUserByUsername======================");
        User user=mapper.findUserByUsername("2014122879");
         System.out.println(JSON.toJSONString(user));
+    }
+    @Test
+    public void testTransaction(){
+        User user=userManager.getUser(2014122879L);
+        user.setUserNickname("ccc");
+        Boolean b=userManager.addUser(user);
+        System.out.println(b);
     }
 }
 

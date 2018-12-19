@@ -5,7 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="spring.redis.model.User">
         <id column="user_id" property="userId"/>
-        <result column="version" property="version"/>
+        <!--<result column="version" property="version"/>-->
         <result column="user_nickname" property="userNickname"/>
         <result column="user_realname" property="userRealname"/>
         <result column="user_account" property="userAccount"/>

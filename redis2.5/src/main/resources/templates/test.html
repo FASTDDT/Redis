@@ -10,6 +10,28 @@
         $(document).ready(function () {
             show2v();
         })
+        function my_delete() {
+            var userid="20141222222";
+            $.ajax({
+                url:"/test/user/"+userid,
+                type:"delete",
+            })
+        }
+        function my_put() {
+            var id="66666";
+            var jsonstr={sessionId:"8888",nickName:"hi"}
+            $.ajax({
+                url:"/user/"+id,
+                type:"PUT",
+                // contentType:"application/json",//设置请求参数类型为json字符串
+                data:jsonstr,//将json对象转换成json字符串发送
+                // dataType:"json",
+                success:function(result){
+
+                },
+
+            });
+        }
     </script>
 </head>
 <body>
@@ -53,6 +75,9 @@
 
     <p><input type="submit" value="注册"/></p>
 </form>
-
+<hr/>
+<p style="color: darkblue">restful test</p>
+<button onclick="my_put()">put</button><br/>
+<button onclick="my_delete()">delete</button>
 </body>
 </html>

@@ -10,6 +10,9 @@ import help.Enum.DeleteEnum;
 import help.Form.LoginForm;
 import help.Vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import spring.redis.model.TestUnion;
 import spring.redis.model.User;
 import spring.redis.mapper.UserMapper;
@@ -97,7 +100,7 @@ public class UserManagerImpl extends ServiceImpl<UserMapper, User> implements Us
 
         User u = new User();
         u.setUserId(id);
-        u.setVersion(version);
+//        u.setVersion(version);
         u.setUserNickname("xxx");
         boolean b=updateById(u);
         if(b){
@@ -186,6 +189,12 @@ public class UserManagerImpl extends ServiceImpl<UserMapper, User> implements Us
     public List <User> testSelectSome() {
         List<User> users=userMapper.getSome();
         return users;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,timeout=36000,rollbackFor=Exception.class)
+    public boolean addUser(User user) {
+        return insert(user);
     }
 
 
